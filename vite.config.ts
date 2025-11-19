@@ -12,5 +12,14 @@ export default defineConfig({
   server: {
     allowedHosts: ["b427859bb69e.ngrok-free.app"],
   },
-  
+  build: {
+    rollupOptions: {
+      output: {
+        // Ensure consistent chunk naming  
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]'
+      }
+    }
+  }
 });
