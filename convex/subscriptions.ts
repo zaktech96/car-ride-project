@@ -69,36 +69,66 @@ const createCheckout = async ({
   return result;
 };
 
-export const getAvailablePlansQuery = query({
+// Changed to action because Polar SDK uses fetch() which is not allowed in queries
+export const getAvailablePlansQuery = action({
   handler: async (ctx) => {
+    // Check if Polar is configured
+    if (!process.env.POLAR_ACCESS_TOKEN) {
+      throw new Error("POLAR_ACCESS_TOKEN is not configured in Convex environment variables. Go to Convex Dashboard → Settings → Environment Variables to add it.");
+    }
+    
+    if (!process.env.POLAR_ORGANIZATION_ID) {
+      throw new Error("POLAR_ORGANIZATION_ID is not configured in Convex environment variables. Go to Convex Dashboard → Settings → Environment Variables to add it.");
+    }
+
+    // Log token prefix for debugging (first 10 chars only)
+    const tokenPrefix = process.env.POLAR_ACCESS_TOKEN.substring(0, 10);
+    console.log("🔑 Using Polar token starting with:", tokenPrefix + "...");
+    console.log("🏢 Organization ID:", process.env.POLAR_ORGANIZATION_ID);
+    console.log("🌐 Server mode:", process.env.POLAR_SERVER || "sandbox");
+
     const polar = new Polar({
       server: (process.env.POLAR_SERVER as "sandbox" | "production") || "sandbox",
       accessToken: process.env.POLAR_ACCESS_TOKEN,
     });
 
-    const { result } = await polar.products.list({
-      organizationId: process.env.POLAR_ORGANIZATION_ID,
-      isArchived: false,
-    });
+    try {
+      const { result } = await polar.products.list({
+        organizationId: process.env.POLAR_ORGANIZATION_ID,
+        isArchived: false,
+      });
 
-    // Transform the data to remove Date objects and keep only needed fields
-    const cleanedItems = result.items.map((item) => ({
-      id: item.id,
-      name: item.name,
-      description: item.description,
-      isRecurring: item.isRecurring,
-      prices: item.prices.map((price: any) => ({
-        id: price.id,
-        amount: price.priceAmount,
-        currency: price.priceCurrency,
-        interval: price.recurringInterval,
-      })),
-    }));
+      // Transform the data to remove Date objects and keep only needed fields
+      const cleanedItems = result.items.map((item) => ({
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        isRecurring: item.isRecurring,
+        prices: item.prices.map((price: any) => ({
+          id: price.id,
+          amount: price.priceAmount,
+          currency: price.priceCurrency,
+          interval: price.recurringInterval,
+        })),
+      }));
 
-    return {
-      items: cleanedItems,
-      pagination: result.pagination,
-    };
+      return {
+        items: cleanedItems,
+        pagination: result.pagination,
+      };
+    } catch (error: any) {
+      console.error("❌ Polar API Error:", error);
+      if (error.message?.includes("401") || error.message?.includes("invalid_token")) {
+        throw new Error(
+          "Polar access token is invalid or expired. Please:\n" +
+          "1. Check your token in Polar Dashboard → Settings → API Keys\n" +
+          "2. Copy the correct token to Convex Dashboard → Settings → Environment Variables\n" +
+          "3. Make sure the token starts with 'polar_' and is the full token\n" +
+          "4. Redeploy Convex after adding the token"
+        );
+      }
+      throw error;
+    }
   },
 });
 

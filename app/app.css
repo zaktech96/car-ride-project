@@ -315,3 +315,72 @@ img {
 img[loading="lazy"] {
   content-visibility: auto;
 }
+
+/* Floating particle animations */
+@keyframes float-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -20px) scale(1.05);
+  }
+}
+
+@keyframes float-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(1.05);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-float-1 {
+  animation: float-1 6s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: float-2 8s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+/* Critical Production Fixes - Ensure all buttons are clickable */
+button:not(:disabled):not([disabled]),
+[role="button"]:not([aria-disabled="true"]):not([disabled]),
+a[href]:not([aria-disabled="true"]) {
+  pointer-events: auto !important;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Ensure interactive elements are above backgrounds */
+button:not(:disabled):not([disabled]),
+[role="button"]:not([aria-disabled="true"]):not([disabled]),
+a[href]:not([aria-disabled="true"]) {
+  isolation: isolate;
+}
+
+/* Critical: Ensure no element blocks all clicks */
+body > * {
+  pointer-events: auto;
+}
+
+/* Ensure sections and containers don't block clicks */
+section,
+div[class*="container"],
+div[class*="section"] {
+  pointer-events: auto;
+  position: relative;
+}

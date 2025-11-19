@@ -1,26 +1,23 @@
-import { isFeatureEnabled, isServiceEnabled } from "../../config";
-import Integrations from "~/components/homepage/integrations";
-import { api } from "../../convex/_generated/api";
+import { isFeatureEnabled, isServiceEnabled, config } from "../../config";
+import IntegrationsSection from "~/components/homepage/integrations";
 import type { Route } from "./+types/home";
-import { Suspense, lazy } from 'react';
-import { ContentSkeleton, FeatureSkeleton, PricingSkeleton } from '~/components/ui/skeleton';
-
-// Lazy load components below the fold
-const ContentSection = lazy(() => import("~/components/homepage/content"));
-const CoreFeaturesSection = lazy(() => import("~/components/homepage/core-features"));
-const ConvexComparison = lazy(() => import("~/components/homepage/convex-comparison").then(m => ({ default: m.ConvexComparison })));
-const Pricing = lazy(() => import("~/components/homepage/pricing"));
-const InhouseTools = lazy(() => import("~/components/homepage/inhouse-tools"));
-const FAQ = lazy(() => import("~/components/homepage/faq"));
-const Footer = lazy(() => import("~/components/homepage/footer"));
+import { ErrorBoundary } from "~/components/ComponentErrorBoundary";
+import ContentSection from "~/components/homepage/content";
+import VideoDemo from "~/components/homepage/video-demo";
+import DealsSection from "~/components/homepage/deals";
+import CoreFeaturesSection from "~/components/homepage/core-features";
+import Pricing from "~/components/homepage/pricing";
+import FAQ from "~/components/homepage/faq";
+import FooterSection from "~/components/homepage/footer";
 
 export function meta({}: Route.MetaArgs) {
-  const title = "Kaizen - Launch Your SAAS Quickly";
+  const title = "Rahla — Premium Chauffeur Service in Saudi Arabia";
   const description =
-    "This powerful starter kit is designed to help you launch your SAAS application quickly and efficiently.";
-  const keywords = "Kaizen, SAAS, Launch, Quickly, Efficiently";
-  const siteUrl = "https://www.kaizen.codeandcreed.tech/";
-  const imageUrl = "/kaizen.svg";
+    "Luxury chauffeur service with vetted drivers. Airport pickups, intercity travel, and hourly bookings across Saudi Arabia. Instant WhatsApp confirmation and transparent pricing.";
+  const keywords =
+    "chauffeur service, ride booking, Saudi Arabia, airport transfer, luxury transport, Riyadh, Jeddah, Dammam, intercity travel, chauffeur driver";
+  const siteUrl = "https://www.rahla.com/";
+  const imageUrl = "/rahla.png";
 
   return [
     { title },
@@ -51,15 +48,22 @@ export function meta({}: Route.MetaArgs) {
       name: "keywords",
       content: keywords,
     },
-    { name: "author", content: "Kaizen" },
-    { name: "favicon", content: imageUrl },
+    { name: "author", content: "Rahla" },
+    { name: "robots", content: "index, follow" },
+    { name: "language", content: "en" },
+    { name: "revisit-after", content: "7 days" },
+    { name: "application-name", content: "Rahla" },
+    { name: "msapplication-TileColor", content: "#000000" },
+    { name: "theme-color", content: "#000000" },
   ];
 }
 
 export async function loader(args: Route.LoaderArgs) {
   const authEnabled = isFeatureEnabled("auth") && isServiceEnabled("clerk");
-  const convexEnabled = isFeatureEnabled("convex") && isServiceEnabled("convex");
-  const paymentsEnabled = isFeatureEnabled("payments") && isServiceEnabled("polar");
+  const convexEnabled =
+    isFeatureEnabled("convex") && isServiceEnabled("convex");
+  const paymentsEnabled =
+    isFeatureEnabled("payments") && isServiceEnabled("polar");
 
   // 1. Auth: get userId if auth enabled, else null
   let userId: string | null = null;
@@ -69,73 +73,108 @@ export async function loader(args: Route.LoaderArgs) {
   }
 
   // 2. Fetch subscription status & plans only if Convex enabled
-  let subscriptionData: { hasActiveSubscription: boolean } | null = null;
-  let plans: any = null;
-
-  if (convexEnabled) {
-    const { fetchQuery, fetchAction } = await import("convex/nextjs");
-
-    const promises: Promise<any>[] = [
-      userId
-        ? fetchQuery(api.subscriptions.checkUserSubscriptionStatus, {
-            userId,
-          }).catch((error: unknown) => {
-            console.error("Failed to fetch subscription data:", error);
-            return null;
-          })
-        : Promise.resolve(null),
-    ];
-
-    // Only fetch plans if payments are enabled
-    if (paymentsEnabled) {
-      promises.push(fetchAction(api.subscriptions.getAvailablePlans));
-    } else {
-      promises.push(Promise.resolve(null));
-    }
-
-    [subscriptionData, plans] = await Promise.all(promises);
-  }
+  // For React Router v7, we skip server-side fetching and let the client handle it
+  // The client-side components will use useQuery/useAction hooks
+  // TODO: Implement server-side Convex fetching when needed
+  const plans: any = null;
 
   return {
     isSignedIn: !!userId,
-    hasActiveSubscription: subscriptionData?.hasActiveSubscription || false,
-    plans,
+    hasActiveSubscription: false,
+    plans: plans ?? null,
   };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
+  // Wrap each component in error boundary to prevent one failure from breaking the entire page
   return (
-    <>
-      <Integrations loaderData={loaderData} />
-      <Suspense fallback={<ContentSkeleton />}>
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#ffffff",
+        pointerEvents: "auto",
+        position: "relative",
+        zIndex: 1,
+      }}
+    >
+      <ErrorBoundary
+        fallback={
+          <div
+            style={{
+              minHeight: "400px",
+              backgroundColor: "#ffffff",
+              padding: "2rem",
+            }}
+          >
+            Hero section temporarily unavailable
+          </div>
+        }
+      >
+        <IntegrationsSection loaderData={loaderData} />
+      </ErrorBoundary>
+
+      <ErrorBoundary
+        fallback={
+          <div
+            style={{
+              minHeight: "300px",
+              backgroundColor: "#ffffff",
+              padding: "2rem",
+            }}
+          >
+            Booking form temporarily unavailable
+          </div>
+        }
+      >
         <ContentSection />
-      </Suspense>
-      <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6"><FeatureSkeleton /><FeatureSkeleton /><FeatureSkeleton /></div>}>
+      </ErrorBoundary>
+
+      <ErrorBoundary fallback={null}>
+        <VideoDemo
+          youtubeId={config.ui.video?.youtubeId}
+          vimeoId={config.ui.video?.vimeoId}
+          videoSrc={config.ui.video?.videoSrc}
+          thumbnailSrc={config.ui.video?.thumbnailSrc}
+          title={config.ui.video?.title || "See How It Works"}
+          description={
+            config.ui.video?.description ||
+            "Watch a quick demo of how easy it is to book your ride across Saudi Arabia."
+          }
+        />
+      </ErrorBoundary>
+
+      <ErrorBoundary fallback={null}>
+        <DealsSection />
+      </ErrorBoundary>
+
+      <ErrorBoundary fallback={null}>
         <CoreFeaturesSection />
-      </Suspense>
-      <Suspense fallback={<ContentSkeleton />}>
-        <ConvexComparison />
-      </Suspense>
-      <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6"><PricingSkeleton /><PricingSkeleton /></div>}>
+      </ErrorBoundary>
+
+      <ErrorBoundary fallback={null}>
         <Pricing loaderData={loaderData} />
-      </Suspense>
-      <div className="my-6 flex justify-center">
-        <div
-          aria-hidden
-          className="size-12 rounded-full border bg-background text-muted-foreground shadow-sm grid place-items-center text-2xl font-semibold"
-        >
-          +
-        </div>
-      </div>
-      <Suspense fallback={<ContentSkeleton />}>
-        <InhouseTools />
-      </Suspense>
-      <Suspense fallback={<ContentSkeleton />}>
+      </ErrorBoundary>
+
+      <ErrorBoundary fallback={null}>
         <FAQ />
-      </Suspense>
-      <Suspense fallback={<div className="h-32 bg-muted" />}>
-        <Footer />
-      </Suspense>
-    </>
+      </ErrorBoundary>
+
+      <ErrorBoundary
+        fallback={
+          <div
+            style={{
+              minHeight: "200px",
+              backgroundColor: "#f5f5f5",
+              padding: "2rem",
+              textAlign: "center",
+            }}
+          >
+            © {new Date().getFullYear()} Rahla Chauffeur Service
+          </div>
+        }
+      >
+        <FooterSection />
+      </ErrorBoundary>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { IconDashboard, IconSettings, IconMessageCircle } from "@tabler/icons-react";
+import { IconDashboard, IconSettings, IconMessageCircle, IconCalendar } from "@tabler/icons-react";
 import { Link } from "react-router";
 import { NavMain } from "./nav-main";
 import { NavSecondary } from "./nav-secondary";
@@ -18,6 +18,11 @@ const data = {
       title: "Dashboard",
       url: "/dashboard",
       icon: IconDashboard,
+    },
+    {
+      title: "Bookings",
+      url: "/dashboard/bookings",
+      icon: IconCalendar,
     },
     {
       title: "Chat",

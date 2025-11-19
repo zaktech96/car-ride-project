@@ -62,4 +62,20 @@ export default defineSchema({
     .index("type", ["type"])
     .index("polarEventId", ["polarEventId"])
     .index("by_webhook_id", ["webhookId"]),
+  rides: defineTable({
+    userId: v.string(),
+    subscriptionId: v.optional(v.string()),
+    rideType: v.string(),
+    distance: v.number(),
+    duration: v.number(),
+    basePrice: v.number(),
+    finalPrice: v.number(),
+    discountApplied: v.number(),
+    discountPercentage: v.number(),
+    fromLocation: v.string(),
+    toLocation: v.string(),
+    status: v.string(),
+    createdAt: v.number(),
+  })
+    .index("userId", ["userId"]),
 });

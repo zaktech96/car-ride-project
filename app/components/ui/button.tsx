@@ -40,6 +40,7 @@ function Button({
   variant,
   size,
   asChild = false,
+  disabled,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
@@ -51,6 +52,13 @@ function Button({
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      disabled={disabled}
+      style={{
+        pointerEvents: disabled ? 'none' : 'auto',
+        position: 'relative',
+        zIndex: 1,
+        ...props.style,
+      }}
       {...props}
     />
   )

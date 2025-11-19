@@ -21,9 +21,15 @@ const routes: RouteConfig = [
   route("pricing", "routes/pricing.tsx"),
   route("success", "routes/success.tsx"),
   
+  // Booking routes
+  route("book", "routes/book.tsx"),
+  route("book-ride", "routes/book-ride.tsx"),
+  route("booking/confirm", "routes/booking.confirm.tsx"),
+  
   // Dashboard routes (always included)
   layout("routes/dashboard/layout.tsx", [
     route("dashboard", "routes/dashboard/index.tsx"),
+    route("dashboard/bookings", "routes/dashboard/bookings.tsx"),
     route("dashboard/settings", "routes/dashboard/settings.tsx"),
     route("dashboard/chat", "routes/dashboard/chat.tsx"),
   ]),

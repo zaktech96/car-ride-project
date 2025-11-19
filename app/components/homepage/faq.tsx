@@ -2,29 +2,29 @@ import { FaqSection } from "~/components/ui/faq-section";
 
 const FAQ_ITEMS = [
   {
-    question: "How long does it take to get a SaaS MVP live?",
+    question: "Which cities do you cover in Saudi Arabia?",
     answer:
-      "With Kaizen's TypeScript-first stack and pre-built auth, payments and dashboard, most people can ship a fully-functional MVP within a weekend.",
+      "We provide chauffeur services across major cities in KSA including Riyadh, Jeddah, Dammam, Al Khobar, Mecca, Medina, Taif, Tabuk, and Hail. We also offer intercity routes with transparent pricing.",
   },
   {
-    question: "Is everything type-safe end-to-end?",
+    question: "Do you provide airport pickup services?",
     answer:
-      "Yes — from React components to Convex backend functions, every value is strongly typed and inferred across the network boundary.",
+      "Yes. We offer meet‑and‑greet at the terminal, monitor flight delays in real time, and include waiting time in the price so your driver is ready when you land.",
   },
   {
-    question: "Do I need separate services for my backend?",
+    question: "How do I receive my booking confirmation?",
     answer:
-      "No. Convex handles data, storage, scheduled jobs and serverless functions so you don't have to stitch together databases, queues or cron servers.",
+      "You’ll get an instant WhatsApp message with ride details, driver contact, vehicle, and pickup instructions. All updates are sent over WhatsApp.",
   },
   {
-    question: "Can I use AI to generate new features quickly?",
+    question: "Can I modify or cancel my booking?",
     answer:
-      "Absolutely. Because business logic lives in straightforward TypeScript files, LLMs can read the codebase and scaffold new queries, mutations or UI components with high accuracy.",
+      "Modify by replying to the WhatsApp message. Change pickup time/location or passenger count up to 2 hours before. Cancellations are free up to 1 hour before pickup.",
   },
   {
-    question: "How do I deploy to production?",
+    question: "What payment methods do you accept?",
     answer:
-      "Deploy to Railway with automatic deployments on every push, or self-host on your own infrastructure (Docker file included). Both paths are baked in.",
+      "All major cards and digital wallets are supported. Business accounts get invoices and optional corporate billing. Payment is processed securely at booking.",
   },
 ];
 
@@ -32,7 +32,20 @@ export default function FAQ() {
   return (
     <FaqSection
       title="Frequently Asked Questions"
+      description="Quick answers about booking, airports, coverage and payments"
       items={FAQ_ITEMS}
+      contactInfo={{
+        title: "Still have questions?",
+        description:
+          "Message us and we’ll help you pick the right service in minutes.",
+        buttonText: "Book or Chat",
+        onContact: () => {
+          // Prefer booking route; fall back to WhatsApp if desired
+          if (typeof window !== "undefined") {
+            window.location.href = "/book";
+          }
+        },
+      }}
     />
   );
-} 
+}

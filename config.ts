@@ -78,6 +78,14 @@ export interface AppConfig {
     showDashboard: boolean; // Show dashboard routes  
     showChat: boolean;      // Show AI chat functionality
     showAuth: boolean;      // Show login/signup buttons
+    video?: {
+      youtubeId?: string;
+      vimeoId?: string;
+      videoSrc?: string;
+      thumbnailSrc?: string;
+      title?: string;
+      description?: string;
+    };
   };
 }
 
@@ -103,9 +111,9 @@ const getEnvVar = (key: string): string | undefined => {
 export const config: AppConfig = {
   features: {
     auth: true,        // Enable/disable Authentication
-    payments: false,    // Enable/disable Billing
+    payments: true,    // Enable/disable Billing
     convex: true,      // Enable/disable Convex
-    email: false,      // Enable/disable Email
+    email: true,      // Enable/disable Email
     monitoring: false,  // Enable/disable Monitoring
   },
   services: {
@@ -119,7 +127,7 @@ export const config: AppConfig = {
       secretKey: getEnvVar('CLERK_SECRET_KEY'),
     },
     polar: {
-      enabled: false,
+      enabled: true,
       accessToken: getEnvVar('POLAR_ACCESS_TOKEN'),
       organizationId: getEnvVar('POLAR_ORGANIZATION_ID'),
       webhookSecret: getEnvVar('POLAR_WEBHOOK_SECRET'),
@@ -158,9 +166,14 @@ export const config: AppConfig = {
   },
   ui: {
     showAuth: true,      // Show sign-in/sign-up routes
-    showPricing: false,    // Show pricing page and components
+    showPricing: true,    // Show pricing page and components
     showDashboard: true,  // Show dashboard routes
-    showChat: false,       // Show AI chat functionality
+    showChat: true,       // Show AI chat functionality
+    video: {
+      videoSrc: "/videos/demo.mp4",
+      title: "See How It Works",
+      description: "Watch a quick demo of how easy it is to book your ride across Saudi Arabia.",
+    },
   },
 };
 
