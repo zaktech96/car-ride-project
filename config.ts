@@ -127,7 +127,7 @@ export const config: AppConfig = {
       secretKey: getEnvVar('CLERK_SECRET_KEY'),
     },
     polar: {
-      enabled: true,
+      enabled: false,
       accessToken: getEnvVar('POLAR_ACCESS_TOKEN'),
       organizationId: getEnvVar('POLAR_ORGANIZATION_ID'),
       webhookSecret: getEnvVar('POLAR_WEBHOOK_SECRET'),
