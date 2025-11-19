@@ -1,0 +1,40 @@
+# Default agents to run when no --agents specified
+default_agents = ["cursor", "copilot", "claude", "aider", "zed"]
+
+[mcp]
+enabled = true
+merge_strategy = "merge"
+
+# Local stdio servers commonly useful for Kaizen
+[mcp_servers.filesystem]
+command = "bunx"
+args = ["@modelcontextprotocol/server-filesystem", "."]
+
+[mcp_servers.git]
+command = "bunx"
+args = ["@modelcontextprotocol/server-git", "--repository", "."]
+
+# Example remote server (disabled until configured)
+# [mcp_servers.search]
+# url = "https://mcp.example.com"
+# [mcp_servers.search.headers]
+# Authorization = "Bearer <token>"
+
+[gitignore]
+enabled = true
+
+[agents.cursor]
+enabled = true
+# Rules go to .cursor/rules/ruler_cursor_instructions.mdc
+# MCP merged into .cursor/mcp.json
+
+[agents.copilot]
+enabled = true
+
+[agents.claude]
+enabled = true
+output_path = "CLAUDE.md"
+
+[agents.zed]
+enabled = true
+# Zed writes project-local .zed/settings.json

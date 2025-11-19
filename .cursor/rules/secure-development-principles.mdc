@@ -1,0 +1,146 @@
+---
+description: Guidelines for writing and generating secure code across manual development, automated tooling, and AI-generated code
+globs: 
+alwaysApply: true
+---
+
+# Secure Development Principles
+
+These rules define essential practices for writing and generating secure code.  
+They apply universally — to manual development, automated tooling, and AI-generated code.
+
+All violations must include a clear explanation of which rule was triggered and why, to help developers understand and fix the issue effectively.
+
+## 1. Do Not Use Raw User Input in Sensitive Operations
+
+- **Rule:** Untrusted input must never be used directly in file access, command execution, database queries, or similar sensitive operations.
+- **Examples of violations:**
+  - File paths: `fs.readFile(userInput + '.txt')`
+  - Commands: `exec('npm ' + userCommand)`
+  - Database: `db.query('SELECT * FROM users WHERE id=' + userId)`
+- **Fix:** Always validate, sanitize, and use parameterized operations:
+  - File paths: Use `path.join()` and verify resolved path is within allowed directory
+  - Commands: Use argument arrays: `exec('npm', [userCommand])`
+  - Database: Use prepared statements: `db.query('SELECT * FROM users WHERE id=?', [userId])`
+
+## 2. Do Not Expose Secrets in Public Code
+
+- **Rule:** Secrets such as API keys, credentials, private keys, or tokens must not appear in frontend code, public repositories, or client-distributed files.
+- **Examples of violations:**
+  - `const API_KEY = "sk-1234567890abcdef"`
+  - Environment variables in bundled JS: `VITE_SECRET_KEY`
+  - Private keys in config files that get committed
+- **Fix:**
+  - Use environment variables only for server-side code
+  - For frontend, only use public/non-sensitive configuration
+  - Never commit `.env` files with real secrets
+  - Use `.env.example` with placeholder values
+
+## 3. Enforce Secure Communication Protocols
+
+- **Rule:** Only secure protocols (e.g., HTTPS, TLS) must be used for all external communications.
+- **Examples of violations:**
+  - `http://api.example.com` (should be `https://`)
+  - Unencrypted internal communications
+  - Mixed content (HTTPS page loading HTTP resources)
+- **Fix:**
+  - Always use HTTPS for external APIs
+  - Enforce HTTPS redirects in web servers
+  - Use TLS for database connections when possible
+  - Verify SSL certificates in production
+
+## 4. Avoid Executing Dynamic Code
+
+- **Rule:** Dynamically constructed code or expressions must not be executed at runtime.
+- **Examples of violations:**
+  - `eval(userInput)`
+  - `new Function(userInput)()`
+  - `template.replace('{code}', userExpression)` then executing it
+- **Fix:**
+  - Use safe templating libraries (not eval-based)
+  - Parse user input as data, not code
+  - Use specific functions for specific operations
+  - Consider sandboxing if dynamic code is required
+
+## 5. Validate All External Input
+
+- **Rule:** Inputs from users, external APIs, or third-party systems must be validated before use.
+- **Examples of violations:**
+  - Using API response without checking status/shape
+  - Processing form data without type checking
+  - Reading file contents without validation
+- **Fix:**
+  - Validate input type, format, length, and content
+  - Check API responses for errors before using data
+  - Use schema validation (Zod, TypeScript, JSON Schema)
+  - Reject invalid input with clear errors
+
+## 6. Do Not Log Sensitive Information
+
+- **Rule:** Logs must not contain credentials, tokens, personal identifiers, or other sensitive data.
+- **Examples of violations:**
+  - `console.log('User login:', email, password)`
+  - Request logging that includes auth headers
+  - Error logs with full stack traces containing secrets
+- **Fix:**
+  - Redact or mask sensitive fields: `email: [REDACTED]`
+  - Use secure logging libraries that filter PII
+  - Configure log levels appropriately
+  - Remove stack traces containing secrets from production logs
+
+## 7. Prevent Disabling of Security Controls
+
+- **Rule:** Security checks must not be disabled, bypassed, or suppressed without documented and reviewed justification.
+- **Examples of violations:**
+  - `// @ts-ignore` on security-related code
+  - Disabling HTTPS checking: `rejectUnauthorized: false`
+  - Removing authentication from specific endpoints without review
+- **Fix:**
+  - Document any security exceptions with clear reasoning
+  - Require code review for security bypass
+  - Use feature flags for temporary overrides
+  - Add automated alerts for disabled security checks
+
+## 8. Limit Trust in Client-Side Logic
+
+- **Rule:** Critical logic related to permissions, authentication, or validation must not rely solely on client-side code.
+- **Examples of violations:**
+  - Permission checks only in frontend
+  - Pricing/discount logic only enforced client-side
+  - Authentication state stored in JWT without server verification
+- **Fix:**
+  - Always verify permissions on the server
+  - Implement server-side validation for all critical operations
+  - Use server-side session management
+  - Never trust client-side claims without verification
+
+## 9. Detect and Eliminate Hardcoded Credentials
+
+- **Rule:** Credentials must not be hardcoded in source files, configuration, or scripts.
+- **Examples of violations:**
+  - `const DATABASE_PASSWORD = "mySecurePass123"`
+  - Database connection strings in code
+  - API keys in default config files
+- **Fix:**
+  - Use environment variables for all credentials
+  - Use secrets management systems (AWS Secrets Manager, HashiCorp Vault, etc.)
+  - Rotate credentials regularly
+  - Scan repositories with tools like `detect-secrets` or `truffleHog`
+
+---
+
+## Implementation Guidelines
+
+When implementing these principles:
+
+1. **In Code Reviews**: Reference specific rules when identifying security issues
+2. **In Documentation**: Document any intentional security trade-offs with explicit justification
+3. **In Testing**: Include security-focused test cases for each principle
+4. **In Automation**: Use linters and static analysis to catch violations early
+5. **In Incidents**: Use these principles to guide root cause analysis and remediation
+
+## Related Standards
+
+- OWASP Top 10
+- CWE/SANS Top 25 Most Dangerous Software Errors
+- NIST Cybersecurity Framework
