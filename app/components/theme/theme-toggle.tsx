@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import {
@@ -12,9 +13,16 @@ import { useTheme } from "./theme-provider";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const [open, setOpen] = useState(false);
+
+  const handleThemeChange = (newTheme: "light" | "dark") => {
+    console.log("Theme change requested:", newTheme, "Current theme:", theme);
+    setTheme(newTheme);
+    setOpen(false);
+  };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
@@ -27,11 +35,11 @@ export function ThemeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[140px] z-[60]">
+      <DropdownMenuContent align="end" className="min-w-[140px] !z-[60]">
         <DropdownMenuItem
-          onSelect={() => {
-            console.log("Setting theme to light");
-            setTheme("light");
+          onSelect={(e) => {
+            e.preventDefault();
+            handleThemeChange("light");
           }}
           className="flex items-center gap-2 cursor-pointer"
         >
@@ -42,9 +50,9 @@ export function ThemeToggle() {
           )}
         </DropdownMenuItem>
         <DropdownMenuItem
-          onSelect={() => {
-            console.log("Setting theme to dark");
-            setTheme("dark");
+          onSelect={(e) => {
+            e.preventDefault();
+            handleThemeChange("dark");
           }}
           className="flex items-center gap-2 cursor-pointer"
         >
