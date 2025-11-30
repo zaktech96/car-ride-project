@@ -40,6 +40,7 @@ export function ThemeProvider({
     return stored === "dark" ? "dark" : "light";
   });
 
+  // Apply theme on initial mount and when theme changes
   useEffect(() => {
     const root = window.document.documentElement;
 
@@ -56,6 +57,20 @@ export function ThemeProvider({
       setResolvedTheme("light");
     }
   }, [theme]);
+
+  // Apply theme immediately on mount to prevent flash
+  useEffect(() => {
+    const root = window.document.documentElement;
+    const stored = localStorage.getItem(storageKey) as Theme;
+    const initialTheme = stored || defaultTheme;
+    
+    root.classList.remove("light", "dark");
+    if (initialTheme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+  }, []);
 
   const updateTheme = (newTheme: Theme) => {
     localStorage.setItem(storageKey, newTheme);
