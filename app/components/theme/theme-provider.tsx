@@ -43,6 +43,7 @@ export function ThemeProvider({
   // Apply theme on initial mount and when theme changes
   useEffect(() => {
     const root = window.document.documentElement;
+    console.log("Applying theme:", theme);
 
     // Always remove both classes first
     root.classList.remove("light", "dark");
@@ -51,10 +52,12 @@ export function ThemeProvider({
     if (theme === "dark") {
       root.classList.add("dark");
       setResolvedTheme("dark");
+      console.log("Dark class added to root");
     } else {
       // Light mode - ensure dark class is removed, uses :root styles
       root.classList.remove("dark");
       setResolvedTheme("light");
+      console.log("Dark class removed from root (light mode)");
     }
   }, [theme]);
 
@@ -73,6 +76,7 @@ export function ThemeProvider({
   }, []);
 
   const updateTheme = (newTheme: Theme) => {
+    console.log("updateTheme called with:", newTheme);
     localStorage.setItem(storageKey, newTheme);
     setTheme(newTheme);
   };

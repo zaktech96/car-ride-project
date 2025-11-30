@@ -130,8 +130,7 @@ export const Navbar = ({
     <header>
       <nav
         data-state={menuState && "active"}
-        className="fixed top-0 left-0 right-0 w-full"
-        style={{ pointerEvents: 'auto', zIndex: 1000, position: 'fixed' }}
+        className="fixed top-0 left-0 right-0 w-full z-50"
       >
         <div
           className={cn(

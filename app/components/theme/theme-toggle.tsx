@@ -13,10 +13,6 @@ import { useTheme } from "./theme-provider";
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
-  const handleThemeChange = (newTheme: "light" | "dark") => {
-    setTheme(newTheme);
-  };
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -31,9 +27,12 @@ export function ThemeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[140px] z-[100]">
+      <DropdownMenuContent align="end" className="min-w-[140px] z-[60]">
         <DropdownMenuItem
-          onSelect={() => handleThemeChange("light")}
+          onSelect={() => {
+            console.log("Setting theme to light");
+            setTheme("light");
+          }}
           className="flex items-center gap-2 cursor-pointer"
         >
           <Sun className="h-4 w-4" />
@@ -43,7 +42,10 @@ export function ThemeToggle() {
           )}
         </DropdownMenuItem>
         <DropdownMenuItem
-          onSelect={() => handleThemeChange("dark")}
+          onSelect={() => {
+            console.log("Setting theme to dark");
+            setTheme("dark");
+          }}
           className="flex items-center gap-2 cursor-pointer"
         >
           <Moon className="h-4 w-4" />
