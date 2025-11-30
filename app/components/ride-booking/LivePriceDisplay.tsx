@@ -191,14 +191,14 @@ export function LivePriceDisplay({
         {isCalculating && (
           <div className="flex items-center gap-2 py-4">
             <Loader2 className="w-4 h-4 animate-spin text-blue-500" />
-            <span className="text-gray-600">Calculating best price...</span>
+            <span className="text-muted-foreground">Calculating best price...</span>
           </div>
         )}
 
         {/* Error State */}
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-700 text-sm">{error}</p>
+          <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
+            <p className="text-destructive text-sm">{error}</p>
           </div>
         )}
 
@@ -207,17 +207,17 @@ export function LivePriceDisplay({
           <div className="space-y-4">
             {/* Main Price */}
             <div className="text-center py-2">
-              <div className="text-3xl font-bold text-green-600 mb-1">
+              <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">
                 {pricing.finalPrice} {pricing.currency}
               </div>
               {pricing.discountApplied > 0 && (
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-lg text-gray-400 line-through">
+                  <span className="text-lg text-muted-foreground line-through">
                     {pricing.basePrice} {pricing.currency}
                   </span>
                   <Badge
                     variant="secondary"
-                    className="bg-green-100 text-green-700"
+                    className="bg-green-500/10 dark:bg-green-500/20 text-green-700 dark:text-green-400"
                   >
                     <Percent className="w-3 h-3 mr-1" />
                     {pricing.discountPercentage}% off
@@ -228,23 +228,23 @@ export function LivePriceDisplay({
 
             {/* Route Info */}
             {routeInfo && (
-              <div className="grid grid-cols-2 gap-4 p-3 bg-gray-50 rounded-lg">
+              <div className="grid grid-cols-2 gap-4 p-3 bg-muted rounded-lg">
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-blue-500" />
+                  <MapPin className="w-4 h-4 text-blue-500 dark:text-blue-400" />
                   <div>
-                    <div className="text-sm font-medium">
+                    <div className="text-sm font-medium text-foreground">
                       {routeInfo.distance}
                     </div>
-                    <div className="text-xs text-gray-500">Distance</div>
+                    <div className="text-xs text-muted-foreground">Distance</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-purple-500" />
+                  <Clock className="w-4 h-4 text-purple-500 dark:text-purple-400" />
                   <div>
-                    <div className="text-sm font-medium">
+                    <div className="text-sm font-medium text-foreground">
                       {routeInfo.duration}
                     </div>
-                    <div className="text-xs text-gray-500">Duration</div>
+                    <div className="text-xs text-muted-foreground">Duration</div>
                   </div>
                 </div>
               </div>
@@ -252,23 +252,23 @@ export function LivePriceDisplay({
 
             {/* Price Breakdown */}
             <div className="space-y-2">
-              <h4 className="text-sm font-medium text-gray-700 flex items-center gap-2">
+              <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
                 <Info className="w-4 h-4" />
                 Price Breakdown
               </h4>
 
               <div className="space-y-1 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Base fare:</span>
-                  <span>
+                  <span className="text-muted-foreground">Base fare:</span>
+                  <span className="text-foreground">
                     {(pricing.pricingBreakdown?.distancePrice || 0).toFixed(2)}{" "}
                     {pricing.currency}
                   </span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Time charge:</span>
-                  <span>
+                  <span className="text-muted-foreground">Time charge:</span>
+                  <span className="text-foreground">
                     {(pricing.pricingBreakdown?.durationPrice || 0).toFixed(2)}{" "}
                     {pricing.currency}
                   </span>
@@ -276,7 +276,8 @@ export function LivePriceDisplay({
 
                 {pricing.pricingBreakdown?.serviceFee && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Service fee:</span>
+                    <span className="text-muted-foreground">Service fee:</span>
+                    <span className="text-foreground">
                     <span>
                       {pricing.pricingBreakdown.serviceFee.toFixed(2)}{" "}
                       {pricing.currency}
@@ -316,7 +317,7 @@ export function LivePriceDisplay({
                   </div>
                 )}
 
-                <div className="flex justify-between font-semibold text-gray-900 border-t pt-2">
+                <div className="flex justify-between font-semibold text-foreground border-t border-border pt-2">
                   <span>Total:</span>
                   <span>
                     {pricing.finalPrice} {pricing.currency}

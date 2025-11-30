@@ -88,24 +88,10 @@ export async function loader(args: Route.LoaderArgs) {
 export default function Home({ loaderData }: Route.ComponentProps) {
   // Wrap each component in error boundary to prevent one failure from breaking the entire page
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#ffffff",
-        pointerEvents: "auto",
-        position: "relative",
-        zIndex: 1,
-      }}
-    >
+    <div className="min-h-screen bg-background">
       <ErrorBoundary
         fallback={
-          <div
-            style={{
-              minHeight: "400px",
-              backgroundColor: "#ffffff",
-              padding: "2rem",
-            }}
-          >
+          <div className="min-h-[400px] bg-background p-8">
             Hero section temporarily unavailable
           </div>
         }
@@ -115,13 +101,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
       <ErrorBoundary
         fallback={
-          <div
-            style={{
-              minHeight: "300px",
-              backgroundColor: "#ffffff",
-              padding: "2rem",
-            }}
-          >
+          <div className="min-h-[300px] bg-background p-8">
             Booking form temporarily unavailable
           </div>
         }
@@ -161,14 +141,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
       <ErrorBoundary
         fallback={
-          <div
-            style={{
-              minHeight: "200px",
-              backgroundColor: "#f5f5f5",
-              padding: "2rem",
-              textAlign: "center",
-            }}
-          >
+          <div className="min-h-[200px] bg-muted p-8 text-center">
             © {new Date().getFullYear()} Rahla Chauffeur Service
           </div>
         }

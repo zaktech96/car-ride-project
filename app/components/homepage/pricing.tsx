@@ -108,7 +108,7 @@ export default function Pricing({ loaderData }: { loaderData: any }) {
               <Loader2 className="h-4 w-4 animate-spin" />
               <span>Loading plans...</span>
             </div>
-            {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+            {error && <p className="text-destructive mt-4 text-center">{error}</p>}
           </div>
         ) : (
           <div className="mt-8 grid gap-6 md:mt-20 md:grid-cols-3">
@@ -248,8 +248,8 @@ export default function Pricing({ loaderData }: { loaderData: any }) {
         )}
 
         {error && (
-          <div className="mt-8 p-4 bg-red-50 border border-red-200 rounded-md max-w-md mx-auto">
-            <p className="text-red-800 text-center">{error}</p>
+          <div className="mt-8 p-4 bg-destructive/10 border border-destructive/20 rounded-md max-w-md mx-auto">
+            <p className="text-destructive text-center">{error}</p>
           </div>
         )}
 
@@ -257,8 +257,8 @@ export default function Pricing({ loaderData }: { loaderData: any }) {
           !plans?.items.some(
             (plan: any) => plan.prices[0].id === userSubscription.polarPriceId
           ) && (
-            <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-md max-w-md mx-auto">
-              <p className="text-amber-800 text-center text-sm">
+            <div className="mt-8 p-4 bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/30 dark:border-amber-500/40 rounded-md max-w-md mx-auto">
+              <p className="text-amber-600 dark:text-amber-400 text-center text-sm">
                 You have an active subscription that's not shown above. Contact
                 support for assistance.
               </p>

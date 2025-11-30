@@ -120,24 +120,24 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-background pt-20 md:pt-24">
       {/* Header */}
-      <div className="bg-white shadow-sm">
+      <div className="bg-background border-b border-border shadow-sm fixed top-0 left-0 right-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
             <Link
               to="/"
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="w-5 h-5" />
               Back to Home
             </Link>
-            <div className="h-6 w-px bg-gray-300" />
+            <div className="h-6 w-px bg-border" />
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+              <div className="w-8 h-8 bg-foreground rounded-lg flex items-center justify-center text-background font-bold text-sm">
                 رحلة
               </div>
-              <span className="font-semibold text-gray-900">
+              <span className="font-semibold text-foreground">
                 Booking Confirmation
               </span>
             </div>
@@ -150,13 +150,13 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
         <div className="max-w-4xl mx-auto">
           {/* Success Header */}
           <div className="text-center mb-8">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="w-10 h-10 text-green-600" />
+            <div className="w-20 h-20 bg-green-500/10 dark:bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-10 h-10 text-green-600 dark:text-green-400" />
             </div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            <h1 className="text-4xl font-bold text-foreground mb-2">
               Booking Confirmed!
             </h1>
-            <p className="text-xl text-gray-600 mb-4">
+            <p className="text-xl text-muted-foreground mb-4">
               Your chauffeur service has been successfully booked
             </p>
             <Badge variant="secondary" className="text-lg px-4 py-2">
@@ -179,23 +179,23 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
                     {getServiceTypeDisplay(bookingData.serviceType)}
                   </Badge>
                   <div className="text-right">
-                    <div className="text-lg font-semibold text-green-600">
-                      {bookingData.pricing?.finalPrice
-                        ? `${bookingData.pricing.finalPrice} SAR`
-                        : bookingData.estimatedPrice}
-                    </div>
-                    {bookingData.pricing?.discountApplied &&
-                      Number(bookingData.pricing.discountApplied) > 0 && (
-                        <div className="text-sm text-gray-500">
-                          <span className="line-through">
-                            {bookingData.pricing.basePrice} SAR
-                          </span>
-                          <span className="ml-2 text-green-600">
-                            -{bookingData.pricing.discountApplied} SAR (
-                            {bookingData.pricing.discountPercentage}% off)
-                          </span>
-                        </div>
-                      )}
+                      <div className="text-lg font-semibold text-green-600 dark:text-green-400">
+                        {bookingData.pricing?.finalPrice
+                          ? `${bookingData.pricing.finalPrice} SAR`
+                          : bookingData.estimatedPrice}
+                      </div>
+                      {bookingData.pricing?.discountApplied &&
+                        Number(bookingData.pricing.discountApplied) > 0 && (
+                          <div className="text-sm text-muted-foreground">
+                            <span className="line-through">
+                              {bookingData.pricing.basePrice} SAR
+                            </span>
+                            <span className="ml-2 text-green-600 dark:text-green-400">
+                              -{bookingData.pricing.discountApplied} SAR (
+                              {bookingData.pricing.discountPercentage}% off)
+                            </span>
+                          </div>
+                        )}
                   </div>
                 </div>
 
@@ -203,48 +203,48 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
                   <div className="flex items-center gap-3">
                     <MapPin className="w-5 h-5 text-blue-600" />
                     <div>
-                      <div className="font-medium">Pickup Location</div>
-                      <div className="text-gray-600">
+                      <div className="font-medium text-foreground">Pickup Location</div>
+                      <div className="text-muted-foreground">
                         {bookingData.pickupLocation}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-green-600" />
+                    <MapPin className="w-5 h-5 text-green-600 dark:text-green-400" />
                     <div>
-                      <div className="font-medium">Destination</div>
-                      <div className="text-gray-600">
+                      <div className="font-medium text-foreground">Destination</div>
+                      <div className="text-muted-foreground">
                         {bookingData.destination}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-purple-600" />
+                    <Calendar className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                     <div>
-                      <div className="font-medium">Date</div>
-                      <div className="text-gray-600">
+                      <div className="font-medium text-foreground">Date</div>
+                      <div className="text-muted-foreground">
                         {formatDate(bookingData.date)}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-orange-600" />
+                    <Clock className="w-5 h-5 text-orange-600 dark:text-orange-400" />
                     <div>
-                      <div className="font-medium">Time</div>
-                      <div className="text-gray-600">
+                      <div className="font-medium text-foreground">Time</div>
+                      <div className="text-muted-foreground">
                         {formatTime(bookingData.time)}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5 text-indigo-600" />
+                    <Users className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                     <div>
-                      <div className="font-medium">Passengers</div>
-                      <div className="text-gray-600">
+                      <div className="font-medium text-foreground">Passengers</div>
+                      <div className="text-muted-foreground">
                         {bookingData.passengers}{" "}
                         {bookingData.passengers === "1"
                           ? "passenger"
@@ -266,8 +266,8 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-bold text-gray-600">
+                  <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center">
+                    <span className="text-2xl font-bold text-muted-foreground">
                       {bookingData.driverName
                         .split(" ")
                         .map((n) => n[0])
@@ -275,15 +275,15 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
                     </span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold">
+                    <h3 className="text-xl font-semibold text-foreground">
                       {bookingData.driverName}
                     </h3>
                     <div className="flex items-center gap-2">
                       <div className="flex items-center gap-1">
                         <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                        <span className="font-medium">4.9</span>
+                        <span className="font-medium text-foreground">4.9</span>
                       </div>
-                      <span className="text-gray-500">
+                      <span className="text-muted-foreground">
                         • 5 years experience
                       </span>
                     </div>
@@ -292,32 +292,32 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
 
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <Car className="w-5 h-5 text-blue-600" />
+                    <Car className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     <div>
-                      <div className="font-medium">Vehicle</div>
-                      <div className="text-gray-600">{bookingData.vehicle}</div>
+                      <div className="font-medium text-foreground">Vehicle</div>
+                      <div className="text-muted-foreground">{bookingData.vehicle}</div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-green-600" />
+                    <Phone className="w-5 h-5 text-green-600 dark:text-green-400" />
                     <div>
-                      <div className="font-medium">Contact</div>
-                      <div className="text-gray-600">
+                      <div className="font-medium text-foreground">Contact</div>
+                      <div className="text-muted-foreground">
                         {bookingData.driverPhone}
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-blue-50 rounded-lg p-4">
+                <div className="bg-blue-500/10 dark:bg-blue-500/20 border border-blue-500/20 dark:border-blue-500/30 rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <MessageCircle className="w-5 h-5 text-blue-600" />
-                    <span className="font-medium text-blue-900">
+                    <MessageCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <span className="font-medium text-blue-700 dark:text-blue-300">
                       WhatsApp Updates
                     </span>
                   </div>
-                  <p className="text-sm text-blue-800">
+                  <p className="text-sm text-blue-600 dark:text-blue-400">
                     You'll receive real-time updates about your driver's
                     location and arrival time on WhatsApp.
                   </p>
@@ -366,12 +366,12 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-xs font-bold text-blue-600">1</span>
+                  <div className="w-6 h-6 bg-blue-500/10 dark:bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-xs font-bold text-blue-600 dark:text-blue-400">1</span>
                   </div>
                   <div>
-                    <div className="font-medium">Driver Assignment</div>
-                    <div className="text-gray-600">
+                    <div className="font-medium text-foreground">Driver Assignment</div>
+                    <div className="text-muted-foreground">
                       Your driver {bookingData.driverName} has been assigned and
                       will contact you 30 minutes before pickup.
                     </div>
@@ -379,12 +379,12 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-xs font-bold text-blue-600">2</span>
+                  <div className="w-6 h-6 bg-blue-500/10 dark:bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-xs font-bold text-blue-600 dark:text-blue-400">2</span>
                   </div>
                   <div>
-                    <div className="font-medium">Real-time Tracking</div>
-                    <div className="text-gray-600">
+                    <div className="font-medium text-foreground">Real-time Tracking</div>
+                    <div className="text-muted-foreground">
                       You'll receive WhatsApp updates with your driver's
                       location and estimated arrival time.
                     </div>
@@ -392,12 +392,12 @@ export default function BookingConfirm({ loaderData }: Route.ComponentProps) {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-xs font-bold text-blue-600">3</span>
+                  <div className="w-6 h-6 bg-blue-500/10 dark:bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-xs font-bold text-blue-600 dark:text-blue-400">3</span>
                   </div>
                   <div>
-                    <div className="font-medium">Safe Journey</div>
-                    <div className="text-gray-600">
+                    <div className="font-medium text-foreground">Safe Journey</div>
+                    <div className="text-muted-foreground">
                       Your professional chauffeur will ensure a comfortable and
                       safe journey to your destination.
                     </div>

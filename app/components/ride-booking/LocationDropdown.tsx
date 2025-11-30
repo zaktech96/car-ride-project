@@ -333,7 +333,7 @@ export function LocationDropdown({
           {filterType === "all" && (
             <>
               {/* Airports Section */}
-              <div className="px-2 py-1.5 text-xs font-semibold text-gray-500 bg-gray-50">
+              <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground bg-muted">
                 ✈️ Airports
               </div>
               {locations
@@ -344,7 +344,7 @@ export function LocationDropdown({
                       <span className="text-blue-600">✈️</span>
                       <div>
                         <div className="font-medium">{location.address}</div>
-                        <div className="text-xs text-gray-500">
+                        <div className="text-xs text-muted-foreground">
                           {location.city}
                         </div>
                       </div>
@@ -353,7 +353,7 @@ export function LocationDropdown({
                 ))}
 
               {/* Cities & Landmarks Section */}
-              <div className="px-2 py-1.5 text-xs font-semibold text-gray-500 bg-gray-50 mt-2">
+              <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground bg-muted mt-2">
                 🏙️ Cities & Landmarks
               </div>
               {locations

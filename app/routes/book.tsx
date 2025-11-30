@@ -370,10 +370,10 @@ export default function BookRide() {
   const renderServiceSelection = () => (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">
+        <h2 className="text-3xl font-bold text-foreground mb-2">
           Choose Your Service
         </h2>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           Select the type of chauffeur service you need
         </p>
       </div>
@@ -386,8 +386,8 @@ export default function BookRide() {
               key={service.id}
               className={`cursor-pointer transition-all duration-200 hover:shadow-lg ${
                 serviceType === service.id
-                  ? "ring-2 ring-blue-500 bg-blue-50"
-                  : "hover:bg-gray-50"
+                  ? "ring-2 ring-primary bg-primary/10"
+                  : "hover:bg-muted"
               }`}
               onClick={() => handleServiceSelect(service.id)}
             >
@@ -406,7 +406,7 @@ export default function BookRide() {
                   {service.features.map((feature, index) => (
                     <li
                       key={index}
-                      className="flex items-center gap-2 text-sm text-gray-600"
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
                     >
                       <CheckCircle className="w-4 h-4 text-green-500" />
                       {feature}
@@ -462,10 +462,10 @@ export default function BookRide() {
       )}
 
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">
+        <h2 className="text-3xl font-bold text-foreground mb-2">
           Book Your Ride
         </h2>
-        <p className="text-gray-600">Fill in your trip details</p>
+        <p className="text-muted-foreground">Fill in your trip details</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -808,24 +808,24 @@ export default function BookRide() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pt-20 md:pt-24">
+    <div className="min-h-screen bg-gradient-to-b from-background to-background pt-20 md:pt-24">
       {/* Header */}
-      <div className="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
+      <div className="bg-background border-b border-border shadow-sm fixed top-0 left-0 right-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
             <Link
               to="/"
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="w-5 h-5" />
               Back to Home
             </Link>
-            <div className="h-6 w-px bg-gray-300" />
+            <div className="h-6 w-px bg-border" />
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+              <div className="w-8 h-8 bg-foreground rounded-lg flex items-center justify-center text-background font-bold text-sm">
                 رحلة
               </div>
-              <span className="font-semibold text-gray-900">Book a Ride</span>
+              <span className="font-semibold text-foreground">Book a Ride</span>
             </div>
           </div>
         </div>

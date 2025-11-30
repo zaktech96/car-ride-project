@@ -178,9 +178,9 @@ export function LocationInput({
 
       {/* Input Container */}
       <div className="relative">
-        <div className="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20 transition-colors">
+        <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-colors">
           {/* Icon */}
-          {icon || <MapPin className="h-4 w-4 text-gray-400 flex-shrink-0" />}
+          {icon || <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />}
 
           {/* Input */}
           <Input
@@ -208,10 +208,10 @@ export function LocationInput({
             <button
               type="button"
               onClick={handleClear}
-              className="p-1 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0"
+              className="p-1 rounded-full hover:bg-muted transition-colors flex-shrink-0"
               aria-label="Clear input"
             >
-              <X className="h-3 w-3 text-gray-400" />
+              <X className="h-3 w-3 text-muted-foreground" />
             </button>
           )}
         </div>
@@ -220,7 +220,7 @@ export function LocationInput({
         {showSuggestions && suggestions.length > 0 && (
           <div
             ref={suggestionsRef}
-            className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto mt-1"
+            className="absolute top-full left-0 right-0 bg-popover border border-border rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto mt-1"
           >
             {suggestions.map((suggestion, index) => (
               <button
@@ -228,18 +228,18 @@ export function LocationInput({
                 type="button"
                 onClick={() => handleSuggestionSelect(suggestion)}
                 className={cn(
-                  "w-full text-left p-3 hover:bg-blue-50 border-b border-gray-100 last:border-b-0 transition-colors",
-                  selectedIndex === index && "bg-blue-50"
+                  "w-full text-left p-3 hover:bg-muted border-b border-border last:border-b-0 transition-colors",
+                  selectedIndex === index && "bg-muted"
                 )}
               >
                 <div className="flex items-start gap-3">
-                  <MapPin className="h-4 w-4 text-gray-400 mt-1 flex-shrink-0" />
+                  <MapPin className="h-4 w-4 text-muted-foreground mt-1 flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium text-gray-900 truncate">
+                    <div className="font-medium text-foreground truncate">
                       {suggestion.address}
                     </div>
                     {suggestion.city && (
-                      <div className="text-sm text-gray-500 truncate">
+                      <div className="text-sm text-muted-foreground truncate">
                         {suggestion.city}
                         {suggestion.region && `, ${suggestion.region}`}
                       </div>
