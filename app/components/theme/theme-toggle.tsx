@@ -16,7 +16,6 @@ export function ThemeToggle() {
   const [open, setOpen] = useState(false);
 
   const handleThemeChange = (newTheme: "light" | "dark") => {
-    console.log("Theme change requested:", newTheme, "Current theme:", theme);
     setTheme(newTheme);
     setOpen(false);
   };
@@ -35,13 +34,20 @@ export function ThemeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[140px] !z-[60]">
+      <DropdownMenuContent align="end" className="min-w-[140px] !z-[9999]" style={{ pointerEvents: 'auto' }}>
         <DropdownMenuItem
           onSelect={(e) => {
             e.preventDefault();
+            e.stopPropagation();
+            handleThemeChange("light");
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             handleThemeChange("light");
           }}
           className="flex items-center gap-2 cursor-pointer"
+          style={{ pointerEvents: 'auto' }}
         >
           <Sun className="h-4 w-4" />
           <span>Light</span>
@@ -52,9 +58,16 @@ export function ThemeToggle() {
         <DropdownMenuItem
           onSelect={(e) => {
             e.preventDefault();
+            e.stopPropagation();
+            handleThemeChange("dark");
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             handleThemeChange("dark");
           }}
           className="flex items-center gap-2 cursor-pointer"
+          style={{ pointerEvents: 'auto' }}
         >
           <Moon className="h-4 w-4" />
           <span>Dark</span>

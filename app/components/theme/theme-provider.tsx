@@ -40,10 +40,25 @@ export function ThemeProvider({
     return stored === "dark" ? "dark" : "light";
   });
 
-  // Apply theme on initial mount and when theme changes
+  // Apply theme immediately on mount to prevent flash (runs first)
   useEffect(() => {
     const root = window.document.documentElement;
-    console.log("Applying theme:", theme);
+    const stored = localStorage.getItem(storageKey) as Theme;
+    // Default to light mode if no stored value
+    const initialTheme = stored || defaultTheme;
+
+    root.classList.remove("light", "dark");
+    if (initialTheme === "dark") {
+      root.classList.add("dark");
+    } else {
+      // Ensure light mode - remove dark class
+      root.classList.remove("dark");
+    }
+  }, [storageKey, defaultTheme]);
+
+  // Apply theme when theme state changes
+  useEffect(() => {
+    const root = window.document.documentElement;
 
     // Always remove both classes first
     root.classList.remove("light", "dark");
@@ -52,31 +67,14 @@ export function ThemeProvider({
     if (theme === "dark") {
       root.classList.add("dark");
       setResolvedTheme("dark");
-      console.log("Dark class added to root");
     } else {
       // Light mode - ensure dark class is removed, uses :root styles
       root.classList.remove("dark");
       setResolvedTheme("light");
-      console.log("Dark class removed from root (light mode)");
     }
   }, [theme]);
 
-  // Apply theme immediately on mount to prevent flash
-  useEffect(() => {
-    const root = window.document.documentElement;
-    const stored = localStorage.getItem(storageKey) as Theme;
-    const initialTheme = stored || defaultTheme;
-
-    root.classList.remove("light", "dark");
-    if (initialTheme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-  }, []);
-
   const updateTheme = (newTheme: Theme) => {
-    console.log("updateTheme called with:", newTheme);
     localStorage.setItem(storageKey, newTheme);
     setTheme(newTheme);
   };

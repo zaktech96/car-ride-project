@@ -131,6 +131,7 @@ export const Navbar = ({
       <nav
         data-state={menuState && "active"}
         className="fixed top-0 left-0 right-0 w-full z-50"
+        style={{ pointerEvents: 'auto' }}
       >
         <div
           className={cn(
@@ -139,6 +140,7 @@ export const Navbar = ({
               ? "bg-background/80 backdrop-blur-xl rounded-b-2xl border-b border-x border-border/50 shadow-xl shadow-primary/5"
               : "bg-background/60 backdrop-blur-sm"
           )}
+          style={{ pointerEvents: 'auto' }}
         >
           {/* Temporary debug indicator */}
           {/* <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 text-xs z-10">
