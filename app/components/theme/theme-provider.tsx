@@ -44,15 +44,21 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
     const stored = localStorage.getItem(storageKey) as Theme;
-    // Default to light mode if no stored value
-    const initialTheme = stored || defaultTheme;
+    // Default to light mode if no stored value - ensure light mode on first load
+    const initialTheme = (stored === "dark" || stored === "light") ? stored : defaultTheme;
 
+    // Always remove both classes first
     root.classList.remove("light", "dark");
+    
     if (initialTheme === "dark") {
       root.classList.add("dark");
     } else {
-      // Ensure light mode - remove dark class
+      // Ensure light mode - explicitly remove dark class
       root.classList.remove("dark");
+      // If no stored theme, set it to light
+      if (!stored) {
+        localStorage.setItem(storageKey, "light");
+      }
     }
   }, [storageKey, defaultTheme]);
 
