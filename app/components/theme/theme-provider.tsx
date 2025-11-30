@@ -43,14 +43,16 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
 
+    // Always remove both classes first
     root.classList.remove("light", "dark");
 
-    // Only add "dark" class when dark mode is selected, light mode uses default :root styles
+    // Apply theme: dark mode adds class, light mode uses default :root styles
     if (theme === "dark") {
       root.classList.add("dark");
       setResolvedTheme("dark");
     } else {
-      // Light mode - no class needed, uses :root styles
+      // Light mode - ensure dark class is removed, uses :root styles
+      root.classList.remove("dark");
       setResolvedTheme("light");
     }
   }, [theme]);

@@ -12,7 +12,12 @@ import { ConvexReactClient, ConvexProvider } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import type { Route } from "./+types/root";
 import "./app.css";
-import { config, initializeConfig, isFeatureEnabled, isServiceEnabled } from "../config";
+import {
+  config,
+  initializeConfig,
+  isFeatureEnabled,
+  isServiceEnabled,
+} from "../config";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "~/components/theme/theme-provider";
 
@@ -29,7 +34,7 @@ const ensureConfigInitialized = () => {
 let convex: ConvexReactClient | null = null;
 const getConvexClient = () => {
   ensureConfigInitialized();
-  if (!convex && isFeatureEnabled('convex') && config.services.convex?.url) {
+  if (!convex && isFeatureEnabled("convex") && config.services.convex?.url) {
     convex = new ConvexReactClient(config.services.convex.url);
   }
   return convex;
@@ -37,7 +42,7 @@ const getConvexClient = () => {
 
 export async function loader(args: Route.LoaderArgs) {
   ensureConfigInitialized();
-  if (isFeatureEnabled('auth') && isServiceEnabled('clerk')) {
+  if (isFeatureEnabled("auth") && isServiceEnabled("clerk")) {
     const { rootAuthLoader } = await import("@clerk/react-router/ssr.server");
     return rootAuthLoader(args);
   }
@@ -50,7 +55,7 @@ export const links: Route.LinksFunction = () => [
   { rel: "dns-prefetch", href: "https://fonts.gstatic.com" },
   { rel: "dns-prefetch", href: "https://api.convex.dev" },
   { rel: "dns-prefetch", href: "https://clerk.dev" },
-  
+
   // Preconnect to font services
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -58,7 +63,7 @@ export const links: Route.LinksFunction = () => [
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
   },
-  
+
   // Optimized font loading - only load commonly used weights
   {
     rel: "preload",
@@ -71,7 +76,7 @@ export const links: Route.LinksFunction = () => [
     media: "print",
     onLoad: "this.media='all'",
   },
-  
+
   // Preload critical images with proper types
   {
     rel: "preload",
@@ -82,11 +87,11 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "preload",
-    href: "/kaizen-favicon.png", 
+    href: "/kaizen-favicon.png",
     as: "image",
     type: "image/png",
   },
-  
+
   // Icon
   {
     rel: "icon",
@@ -116,9 +121,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App({ loaderData }: Route.ComponentProps) {
   ensureConfigInitialized();
-  const authEnabled = isFeatureEnabled('auth') && isServiceEnabled('clerk');
+  const authEnabled = isFeatureEnabled("auth") && isServiceEnabled("clerk");
   const convexClient = getConvexClient();
-  const convexEnabled = isFeatureEnabled('convex') && convexClient;
+  const convexEnabled = isFeatureEnabled("convex") && convexClient;
 
   // Wrap all cases with ThemeProvider
   const AppContent = () => {
