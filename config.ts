@@ -111,7 +111,7 @@ const getEnvVar = (key: string): string | undefined => {
 export const config: AppConfig = {
   features: {
     auth: true,        // Enable/disable Authentication
-    payments: false,    // Enable/disable Billing
+    payments: true,    // Enable/disable Billing
     convex: true,      // Enable/disable Convex
     email: true,      // Enable/disable Email
     monitoring: false,  // Enable/disable Monitoring
@@ -122,12 +122,12 @@ export const config: AppConfig = {
       mode: "b2c",
     },
     clerk: {
-      enabled: false,
+      enabled: true,
       publishableKey: getEnvVar('VITE_CLERK_PUBLISHABLE_KEY'),
       secretKey: getEnvVar('CLERK_SECRET_KEY'),
     },
     polar: {
-      enabled: false,
+      enabled: true,
       accessToken: getEnvVar('POLAR_ACCESS_TOKEN'),
       organizationId: getEnvVar('POLAR_ORGANIZATION_ID'),
       webhookSecret: getEnvVar('POLAR_WEBHOOK_SECRET'),
