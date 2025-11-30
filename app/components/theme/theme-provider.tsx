@@ -63,7 +63,7 @@ export function ThemeProvider({
     const root = window.document.documentElement;
     const stored = localStorage.getItem(storageKey) as Theme;
     const initialTheme = stored || defaultTheme;
-    
+
     root.classList.remove("light", "dark");
     if (initialTheme === "dark") {
       root.classList.add("dark");

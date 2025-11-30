@@ -29,7 +29,10 @@ export function ThemeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[140px]">
         <DropdownMenuItem
-          onClick={() => setTheme("light")}
+          onSelect={(e) => {
+            e.preventDefault();
+            setTheme("light");
+          }}
           className="flex items-center gap-2 cursor-pointer"
         >
           <Sun className="h-4 w-4" />
@@ -39,7 +42,10 @@ export function ThemeToggle() {
           )}
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setTheme("dark")}
+          onSelect={(e) => {
+            e.preventDefault();
+            setTheme("dark");
+          }}
           className="flex items-center gap-2 cursor-pointer"
         >
           <Moon className="h-4 w-4" />
