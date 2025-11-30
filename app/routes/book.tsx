@@ -134,8 +134,9 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   // In FAKE payments mode, route through fake checkout first
-  const testing = getServiceConfig("testing");
-  if (testing?.fakePayments) {
+  // Note: fakePayments feature removed - using real Polar payments
+  const fakePaymentsEnabled = false;
+  if (fakePaymentsEnabled) {
     const fake = new URLSearchParams();
     fake.set("bookingId", bookingData.id);
     fake.set("amount", bookingData.estimatedPrice.replace(/[^0-9.]/g, ""));

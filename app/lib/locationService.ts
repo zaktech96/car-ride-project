@@ -55,7 +55,7 @@ class LocationService {
   private async loadGoogleMapsAPI(): Promise<void> {
     if (this.isLoaded || typeof window === 'undefined') return;
     
-    if (window.google?.maps) {
+    if ((window as any).google?.maps) {
       this.isLoaded = true;
       return;
     }
@@ -92,7 +92,7 @@ class LocationService {
       await this.loadGoogleMapsAPI();
       
       return new Promise((resolve) => {
-        const service = new google.maps.places.AutocompleteService();
+        const service = new (window as any).google.maps.places.AutocompleteService();
         
         service.getPlacePredictions({
           input: query,
@@ -489,7 +489,7 @@ class LocationService {
     return cityComponent?.long_name || '';
   }
 
-  private extractRegionFromComponents(components: google.maps.GeocoderAddressComponent[]): string {
+  private extractRegionFromComponents(components: Array<{ types: string[]; long_name: string; short_name: string }>): string {
     const regionComponent = components.find(component => 
       component.types.includes('administrative_area_level_1')
     );

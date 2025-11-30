@@ -23,6 +23,7 @@ import {
   Car,
   Crown,
   Zap,
+  Loader2,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { api } from "../../../convex/_generated/api";

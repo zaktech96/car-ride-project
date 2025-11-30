@@ -278,7 +278,6 @@ export function LivePriceDisplay({
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Service fee:</span>
                     <span className="text-foreground">
-                    <span>
                       {pricing.pricingBreakdown.serviceFee.toFixed(2)}{" "}
                       {pricing.currency}
                     </span>
