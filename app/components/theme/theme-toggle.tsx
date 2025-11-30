@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun, Monitor } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
@@ -11,7 +11,11 @@ import {
 import { useTheme } from "./theme-provider";
 
 export function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+
+  const handleThemeChange = (newTheme: "light" | "dark") => {
+    setTheme(newTheme);
+  };
 
   return (
     <DropdownMenu>
@@ -27,12 +31,9 @@ export function ThemeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[140px]">
+      <DropdownMenuContent align="end" className="min-w-[140px] z-[100]">
         <DropdownMenuItem
-          onSelect={(e) => {
-            e.preventDefault();
-            setTheme("light");
-          }}
+          onSelect={() => handleThemeChange("light")}
           className="flex items-center gap-2 cursor-pointer"
         >
           <Sun className="h-4 w-4" />
@@ -42,10 +43,7 @@ export function ThemeToggle() {
           )}
         </DropdownMenuItem>
         <DropdownMenuItem
-          onSelect={(e) => {
-            e.preventDefault();
-            setTheme("dark");
-          }}
+          onSelect={() => handleThemeChange("dark")}
           className="flex items-center gap-2 cursor-pointer"
         >
           <Moon className="h-4 w-4" />
