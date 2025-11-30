@@ -14,6 +14,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import { config, initializeConfig, isFeatureEnabled, isServiceEnabled } from "../config";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "~/components/theme/theme-provider";
 
 // Defer configuration initialization
 let configInitialized = false;
@@ -119,45 +120,54 @@ export default function App({ loaderData }: Route.ComponentProps) {
   const convexClient = getConvexClient();
   const convexEnabled = isFeatureEnabled('convex') && convexClient;
 
-  // Case 1: Both auth and convex enabled
-  if (authEnabled && convexEnabled && convexClient) {
+  // Wrap all cases with ThemeProvider
+  const AppContent = () => {
+    // Case 1: Both auth and convex enabled
+    if (authEnabled && convexEnabled && convexClient) {
+      return (
+        <ClerkProvider
+          loaderData={loaderData}
+          signUpFallbackRedirectUrl="/"
+          signInFallbackRedirectUrl="/"
+        >
+          <ConvexProviderWithClerk client={convexClient} useAuth={useAuth}>
+            <Outlet />
+          </ConvexProviderWithClerk>
+        </ClerkProvider>
+      );
+    }
+
+    // Case 2: Only auth enabled
+    if (authEnabled && !convexEnabled) {
+      return (
+        <ClerkProvider
+          loaderData={loaderData}
+          signUpFallbackRedirectUrl="/"
+          signInFallbackRedirectUrl="/"
+        >
+          <Outlet />
+        </ClerkProvider>
+      );
+    }
+
+    // Case 3: Only convex enabled
+    if (!authEnabled && convexEnabled && convexClient) {
+      return (
+        <ConvexProvider client={convexClient}>
+          <Outlet />
+        </ConvexProvider>
+      );
+    }
+
+    // Case 4: Neither auth nor convex enabled
+    return <Outlet />;
+  };
+
   return (
-    <ClerkProvider
-      loaderData={loaderData}
-      signUpFallbackRedirectUrl="/"
-      signInFallbackRedirectUrl="/"
-    >
-      <ConvexProviderWithClerk client={convexClient} useAuth={useAuth}>
-        <Outlet />
-      </ConvexProviderWithClerk>
-    </ClerkProvider>
+    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      <AppContent />
+    </ThemeProvider>
   );
-  }
-
-  // Case 2: Only auth enabled
-  if (authEnabled && !convexEnabled) {
-    return (
-      <ClerkProvider
-        loaderData={loaderData}
-        signUpFallbackRedirectUrl="/"
-        signInFallbackRedirectUrl="/"
-      >
-        <Outlet />
-      </ClerkProvider>
-    );
-  }
-
-  // Case 3: Only convex enabled
-  if (!authEnabled && convexEnabled && convexClient) {
-    return (
-      <ConvexProvider client={convexClient}>
-        <Outlet />
-      </ConvexProvider>
-    );
-  }
-
-  // Case 4: Neither auth nor convex enabled
-  return <Outlet />;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

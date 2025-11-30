@@ -3,7 +3,7 @@ import RideBookingForm from "~/components/ride-booking/ride-booking-form";
 
 export default function BookRide(props: Route.ComponentProps) {
   return (
-    <div className="min-h-screen bg-background py-12 md:py-16 lg:py-20 relative overflow-hidden">
+    <div className="min-h-screen bg-background pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20 relative overflow-hidden">
       {/* Enhanced background with animated gradients */}
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-blue-500/3 via-transparent to-indigo-500/5 opacity-60" />

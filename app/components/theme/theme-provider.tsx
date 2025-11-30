@@ -84,12 +84,14 @@ export function ThemeProvider({
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, [theme]);
 
+  const updateTheme = (newTheme: Theme) => {
+    localStorage.setItem(storageKey, newTheme);
+    setTheme(newTheme);
+  };
+
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
+    setTheme: updateTheme,
     resolvedTheme,
   };
 
