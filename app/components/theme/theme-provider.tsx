@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "dark" | "light" | "system";
+type Theme = "dark" | "light";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: "light",
   setTheme: () => null,
   resolvedTheme: "light",
 };
@@ -26,7 +26,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
@@ -37,12 +37,7 @@ export function ThemeProvider({
   const [resolvedTheme, setResolvedTheme] = useState<"dark" | "light">(() => {
     if (typeof window === "undefined") return "light";
     const stored = localStorage.getItem(storageKey) as Theme;
-    if (stored === "system") {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    }
-    return stored || "light";
+    return stored === "dark" ? "dark" : "light";
   });
 
   useEffect(() => {
@@ -50,47 +45,14 @@ export function ThemeProvider({
 
     root.classList.remove("light", "dark");
 
-    let resolved: "dark" | "light";
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-      resolved = systemTheme;
-      // Only add "dark" class, light mode uses default :root styles
-      if (systemTheme === "dark") {
-        root.classList.add("dark");
-      }
+    // Only add "dark" class when dark mode is selected, light mode uses default :root styles
+    if (theme === "dark") {
+      root.classList.add("dark");
+      setResolvedTheme("dark");
     } else {
-      resolved = theme;
-      // Only add "dark" class, light mode uses default :root styles
-      if (theme === "dark") {
-        root.classList.add("dark");
-      }
+      // Light mode - no class needed, uses :root styles
+      setResolvedTheme("light");
     }
-
-    setResolvedTheme(resolved);
-  }, [theme]);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const handleChange = () => {
-      if (theme === "system") {
-        const root = window.document.documentElement;
-        root.classList.remove("light", "dark");
-        const systemTheme = mediaQuery.matches ? "dark" : "light";
-        // Only add "dark" class, light mode uses default :root styles
-        if (systemTheme === "dark") {
-          root.classList.add("dark");
-        }
-        setResolvedTheme(systemTheme);
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
   }, [theme]);
 
   const updateTheme = (newTheme: Theme) => {

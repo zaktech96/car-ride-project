@@ -48,16 +48,6 @@ export function ThemeToggle() {
             <span className="ml-auto text-primary">✓</span>
           )}
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setTheme("system")}
-          className="flex items-center gap-2 cursor-pointer"
-        >
-          <Monitor className="h-4 w-4" />
-          <span>System</span>
-          {theme === "system" && (
-            <span className="ml-auto text-primary">✓</span>
-          )}
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
