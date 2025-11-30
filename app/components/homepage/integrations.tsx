@@ -61,10 +61,10 @@ function StatusTime() {
   return (
     <div
       suppressHydrationWarning
-      className="text-white text-xs h-4 overflow-hidden tabular-nums flex items-center"
+      className="text-white text-xs h-5 overflow-visible tabular-nums flex items-center"
     >
       <div
-        className="relative w-3.5 h-3.5 rounded-full mr-2"
+        className="relative w-3.5 h-3.5 rounded-full mr-2 flex-shrink-0"
         style={{
           background: `conic-gradient(${ringColor} ${progress}%, transparent 0)`,
         }}
@@ -79,6 +79,7 @@ function StatusTime() {
           animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
           exit={{ y: -8, opacity: 0, filter: "blur(2px)" }}
           transition={{ duration: 0.25, ease: "easeOut" }}
+          className="leading-none"
         >
           {timeString ?? "9:41"}
         </MotionSpan>
@@ -175,7 +176,7 @@ function IntegrationsSectionContent({
             {/* Interactive App Mockup */}
             <div className="relative bg-foreground rounded-2xl shadow-2xl w-[300px] h-[620px] overflow-hidden">
               {/* Status bar */}
-              <div className="flex justify-between items-center px-4 py-2 bg-foreground/80">
+              <div className="flex justify-between items-center px-4 pt-3 pb-2 bg-foreground/80">
                 <StatusTime />
                 <div className="flex gap-1">
                   <div className="w-4 h-2 bg-background rounded-sm"></div>

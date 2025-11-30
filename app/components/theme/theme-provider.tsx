@@ -45,11 +45,12 @@ export function ThemeProvider({
     const root = window.document.documentElement;
     const stored = localStorage.getItem(storageKey) as Theme;
     // Default to light mode if no stored value - ensure light mode on first load
-    const initialTheme = (stored === "dark" || stored === "light") ? stored : defaultTheme;
+    const initialTheme =
+      stored === "dark" || stored === "light" ? stored : defaultTheme;
 
     // Always remove both classes first
     root.classList.remove("light", "dark");
-    
+
     if (initialTheme === "dark") {
       root.classList.add("dark");
     } else {
