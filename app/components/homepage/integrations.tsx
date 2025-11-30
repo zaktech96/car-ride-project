@@ -110,24 +110,24 @@ class IntegrationsErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <section id="hero" className="relative overflow-hidden min-h-[600px]" style={{ backgroundColor: '#ffffff', color: '#000000', display: 'block', visibility: 'visible' }}>
+        <section id="hero" className="relative overflow-hidden min-h-[600px] bg-background">
           <Navbar loaderData={this.props.loaderData} />
-          <div className="container mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10" style={{ backgroundColor: '#ffffff', minHeight: '400px' }}>
-            <div className="flex flex-col space-y-6" style={{ color: '#000000' }}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: '#000000', margin: 0 }}>
+          <div className="container mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10 bg-background min-h-[400px]">
+            <div className="flex flex-col space-y-6 text-foreground">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground m-0">
                 Premium Chauffeur Service in Saudi Arabia
               </h1>
-              <p className="text-lg" style={{ color: '#666666', margin: 0 }}>
+              <p className="text-lg text-muted-foreground m-0">
                 Book your luxury ride with vetted drivers. Airport transfers, intercity travel, and hourly bookings.
               </p>
-              <Link to="/book" style={{ display: 'inline-block', marginTop: '1rem' }}>
-                <Button size="lg" className="w-fit" style={{ backgroundColor: '#0B93F6', color: '#ffffff' }}>
+              <Link to="/book" className="inline-block mt-4">
+                <Button size="lg" className="w-fit">
                   Book Your Ride <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>
-            <div style={{ backgroundColor: '#f5f5f5', borderRadius: '12px', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <p style={{ color: '#666666' }}>App Preview</p>
+            <div className="bg-muted rounded-xl min-h-[400px] flex items-center justify-center">
+              <p className="text-muted-foreground">App Preview</p>
             </div>
           </div>
         </section>
@@ -160,7 +160,7 @@ function IntegrationsSectionContent({
   }, []);
 
   return (
-    <section id="hero" className="relative bg-background overflow-hidden min-h-[600px]" style={{ backgroundColor: '#ffffff' }}>
+    <section id="hero" className="relative bg-background overflow-hidden min-h-[600px]">
       <Navbar loaderData={loaderData} />
 
       <div className="container mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
@@ -173,19 +173,19 @@ function IntegrationsSectionContent({
         >
           <div className="relative">
             {/* Interactive App Mockup */}
-            <div className="relative bg-gray-900 rounded-2xl shadow-2xl w-[300px] h-[620px] overflow-hidden">
+            <div className="relative bg-foreground rounded-2xl shadow-2xl w-[300px] h-[620px] overflow-hidden">
               {/* Status bar */}
-              <div className="flex justify-between items-center px-4 py-2 bg-gray-800">
+              <div className="flex justify-between items-center px-4 py-2 bg-foreground/80">
                 <StatusTime />
                 <div className="flex gap-1">
-                  <div className="w-4 h-2 bg-white rounded-sm"></div>
-                  <div className="w-4 h-2 bg-white rounded-sm"></div>
-                  <div className="w-4 h-2 bg-white rounded-sm"></div>
+                  <div className="w-4 h-2 bg-background rounded-sm"></div>
+                  <div className="w-4 h-2 bg-background rounded-sm"></div>
+                  <div className="w-4 h-2 bg-background rounded-sm"></div>
                 </div>
               </div>
 
               {/* App Content */}
-              <div className="h-full bg-white flex flex-col">
+              <div className="h-full bg-background flex flex-col">
                 <AnimatePresence mode="wait">
                   {currentScreen === 0 && (
                     <MotionDiv
@@ -197,48 +197,48 @@ function IntegrationsSectionContent({
                     >
                       {/* Header */}
                       <div className="text-center py-6">
-                        <div className="w-12 h-12 bg-gray-900 rounded-xl mx-auto mb-2 flex items-center justify-center text-white font-bold text-lg">
+                        <div className="w-12 h-12 bg-foreground rounded-xl mx-auto mb-2 flex items-center justify-center text-background font-bold text-lg">
                           رحلة
                         </div>
-                        <h2 className="font-bold text-gray-900">
+                        <h2 className="font-bold text-foreground">
                           Welcome to Rahla
                         </h2>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-muted-foreground">
                           Luxury chauffeur service
                         </p>
                       </div>
 
                       {/* Quick actions */}
                       <div className="space-y-3">
-                        <div className="bg-blue-50 rounded-lg p-3 flex items-center gap-3">
-                          <Plane className="w-6 h-6 text-blue-600" />
+                        <div className="bg-blue-500/10 dark:bg-blue-500/20 rounded-lg p-3 flex items-center gap-3">
+                          <Plane className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                           <div>
-                            <div className="font-medium text-gray-900">
+                            <div className="font-medium text-foreground">
                               Airport Pickup
                             </div>
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-muted-foreground">
                               Meet & greet service
                             </div>
                           </div>
                         </div>
-                        <div className="bg-green-50 rounded-lg p-3 flex items-center gap-3">
-                          <Car className="w-6 h-6 text-green-600" />
+                        <div className="bg-green-500/10 dark:bg-green-500/20 rounded-lg p-3 flex items-center gap-3">
+                          <Car className="w-6 h-6 text-green-600 dark:text-green-400" />
                           <div>
-                            <div className="font-medium text-gray-900">
+                            <div className="font-medium text-foreground">
                               Intercity Trip
                             </div>
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-muted-foreground">
                               Riyadh to Jeddah
                             </div>
                           </div>
                         </div>
-                        <div className="bg-purple-50 rounded-lg p-3 flex items-center gap-3">
-                          <Clock className="w-6 h-6 text-purple-600" />
+                        <div className="bg-purple-500/10 dark:bg-purple-500/20 rounded-lg p-3 flex items-center gap-3">
+                          <Clock className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                           <div>
-                            <div className="font-medium text-gray-900">
+                            <div className="font-medium text-foreground">
                               Hourly Service
                             </div>
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-muted-foreground">
                               Flexible bookings
                             </div>
                           </div>
@@ -247,7 +247,7 @@ function IntegrationsSectionContent({
 
                       {/* CTA Button */}
                       <div className="mt-auto mb-6">
-                        <div className="bg-gray-900 text-white rounded-lg py-3 text-center font-medium">
+                        <div className="bg-foreground text-background rounded-lg py-3 text-center font-medium">
                           Book a Ride
                         </div>
                       </div>
@@ -263,50 +263,50 @@ function IntegrationsSectionContent({
                       className="p-6 h-full flex flex-col"
                     >
                       <div className="text-center py-6">
-                        <h2 className="font-bold text-gray-900">
+                        <h2 className="font-bold text-foreground">
                           Choose Service
                         </h2>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-muted-foreground">
                           Select your ride type
                         </p>
                       </div>
 
                       <div className="space-y-3">
-                        <div className="border-2 border-blue-500 bg-blue-50 rounded-lg p-3">
+                        <div className="border-2 border-blue-500 bg-blue-500/10 dark:bg-blue-500/20 rounded-lg p-3">
                           <div className="flex items-center gap-3">
-                            <Plane className="w-6 h-6 text-blue-600" />
+                            <Plane className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                             <div className="flex-1">
-                              <div className="font-medium text-gray-900">
+                              <div className="font-medium text-foreground">
                                 Airport Pickup
                               </div>
-                              <div className="text-xs text-gray-600">
+                              <div className="text-xs text-muted-foreground">
                                 From 150 SAR
                               </div>
                             </div>
-                            <CheckCircle className="w-5 h-5 text-blue-600" />
+                            <CheckCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                           </div>
                         </div>
-                        <div className="border border-gray-200 rounded-lg p-3">
+                        <div className="border border-border rounded-lg p-3">
                           <div className="flex items-center gap-3">
-                            <Car className="w-6 h-6 text-gray-400" />
+                            <Car className="w-6 h-6 text-muted-foreground" />
                             <div className="flex-1">
-                              <div className="font-medium text-gray-900">
+                              <div className="font-medium text-foreground">
                                 Intercity Trip
                               </div>
-                              <div className="text-xs text-gray-600">
+                              <div className="text-xs text-muted-foreground">
                                 From 300 SAR
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div className="border border-gray-200 rounded-lg p-3">
+                        <div className="border border-border rounded-lg p-3">
                           <div className="flex items-center gap-3">
-                            <Clock className="w-6 h-6 text-gray-400" />
+                            <Clock className="w-6 h-6 text-muted-foreground" />
                             <div className="flex-1">
-                              <div className="font-medium text-gray-900">
+                              <div className="font-medium text-foreground">
                                 Hourly Service
                               </div>
-                              <div className="text-xs text-gray-600">
+                              <div className="text-xs text-muted-foreground">
                                 80 SAR/hour
                               </div>
                             </div>
@@ -315,7 +315,7 @@ function IntegrationsSectionContent({
                       </div>
 
                       <div className="mt-auto mb-6">
-                        <div className="bg-gray-900 text-white rounded-lg py-3 text-center font-medium">
+                        <div className="bg-foreground text-background rounded-lg py-3 text-center font-medium">
                           Continue
                         </div>
                       </div>
@@ -331,51 +331,51 @@ function IntegrationsSectionContent({
                       className="p-6 h-full flex flex-col"
                     >
                       <div className="text-center py-6">
-                        <h2 className="font-bold text-gray-900">
+                        <h2 className="font-bold text-foreground">
                           Book Your Ride
                         </h2>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-muted-foreground">
                           Fill in the details
                         </p>
                       </div>
 
                       <div className="space-y-3">
                         <div>
-                          <label className="text-xs text-gray-600">
+                          <label className="text-xs text-muted-foreground">
                             Pickup Location
                           </label>
-                          <div className="bg-gray-50 rounded-lg p-3 text-sm">
+                          <div className="bg-muted rounded-lg p-3 text-sm text-foreground">
                             King Khalid Airport
                           </div>
                         </div>
                         <div>
-                          <label className="text-xs text-gray-600">
+                          <label className="text-xs text-muted-foreground">
                             Destination
                           </label>
-                          <div className="bg-gray-50 rounded-lg p-3 text-sm">
+                          <div className="bg-muted rounded-lg p-3 text-sm text-foreground">
                             Riyadh City Center
                           </div>
                         </div>
                         <div>
-                          <label className="text-xs text-gray-600">
+                          <label className="text-xs text-muted-foreground">
                             Date & Time
                           </label>
-                          <div className="bg-gray-50 rounded-lg p-3 text-sm">
+                          <div className="bg-muted rounded-lg p-3 text-sm text-foreground">
                             Today, 2:30 PM
                           </div>
                         </div>
                         <div>
-                          <label className="text-xs text-gray-600">
+                          <label className="text-xs text-muted-foreground">
                             Passengers
                           </label>
-                          <div className="bg-gray-50 rounded-lg p-3 text-sm">
+                          <div className="bg-muted rounded-lg p-3 text-sm text-foreground">
                             2 passengers
                           </div>
                         </div>
                       </div>
 
                       <div className="mt-auto mb-6">
-                        <div className="bg-gray-900 text-white rounded-lg py-3 text-center font-medium">
+                        <div className="bg-foreground text-background rounded-lg py-3 text-center font-medium">
                           Confirm Booking
                         </div>
                       </div>
@@ -391,29 +391,29 @@ function IntegrationsSectionContent({
                       className="p-6 h-full flex flex-col items-center justify-center"
                     >
                       <div className="text-center">
-                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <CheckCircle className="w-8 h-8 text-green-600" />
+                        <div className="w-16 h-16 bg-green-500/10 dark:bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
                         </div>
-                        <h2 className="font-bold text-gray-900 mb-2">
+                        <h2 className="font-bold text-foreground mb-2">
                           Booking Confirmed!
                         </h2>
-                        <p className="text-sm text-gray-600 mb-4">
+                        <p className="text-sm text-muted-foreground mb-4">
                           Your ride has been booked successfully
                         </p>
 
-                        <div className="bg-gray-50 rounded-lg p-3 text-left w-full">
-                          <div className="text-xs text-gray-600 mb-1">
+                        <div className="bg-muted rounded-lg p-3 text-left w-full">
+                          <div className="text-xs text-muted-foreground mb-1">
                             Booking ID
                           </div>
-                          <div className="font-mono text-sm">#RH-2024-001</div>
-                          <div className="text-xs text-gray-600 mt-2 mb-1">
+                          <div className="font-mono text-sm text-foreground">#RH-2024-001</div>
+                          <div className="text-xs text-muted-foreground mt-2 mb-1">
                             Driver
                           </div>
-                          <div className="text-sm">Ahmed Al-Rashid</div>
-                          <div className="text-xs text-gray-600 mt-2 mb-1">
+                          <div className="text-sm text-foreground">Ahmed Al-Rashid</div>
+                          <div className="text-xs text-muted-foreground mt-2 mb-1">
                             Vehicle
                           </div>
-                          <div className="text-sm">BMW 7 Series</div>
+                          <div className="text-sm text-foreground">BMW 7 Series</div>
                         </div>
                       </div>
                     </MotionDiv>
@@ -431,15 +431,15 @@ function IntegrationsSectionContent({
                         <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-2">
                           <MessageCircle className="w-6 h-6 text-white" />
                         </div>
-                        <h2 className="font-bold text-gray-900">
+                        <h2 className="font-bold text-foreground">
                           WhatsApp Confirmation
                         </h2>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-muted-foreground">
                           You'll receive updates here
                         </p>
                       </div>
 
-                      <div className="flex-1 bg-gray-50 rounded-lg p-4 mb-4 overflow-y-auto">
+                      <div className="flex-1 bg-muted rounded-lg p-4 mb-4 overflow-y-auto">
                         <div className="space-y-4">
                           <div className="bg-green-500 text-white rounded-lg p-3 text-sm ml-8">
                             ✅ Booking confirmed! Your driver Ahmed will arrive
@@ -457,7 +457,7 @@ function IntegrationsSectionContent({
                       </div>
 
                       <div className="px-4 pb-4 flex-shrink-0">
-                        <div className="bg-gray-900 text-white rounded-lg py-3 text-center font-medium">
+                        <div className="bg-foreground text-background rounded-lg py-3 text-center font-medium">
                           View Booking Details
                         </div>
                       </div>
@@ -477,37 +477,37 @@ function IntegrationsSectionContent({
           className="space-y-6 order-1 md:order-2"
         >
           <div className="flex justify-center md:justify-start mb-8">
-            <div className="inline-flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-full px-4 py-2">
+            <div className="inline-flex items-center gap-2 bg-muted border border-border rounded-full px-4 py-2">
               <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-sm font-medium text-gray-700">
+              <span className="text-sm font-medium text-foreground">
                 رحلة · Rahla
               </span>
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-foreground text-center md:text-left">
             Luxury Chauffeur Service <br /> in Saudi Arabia
           </h1>
-          <p className="text-lg text-gray-600 max-w-lg text-center md:text-left">
+          <p className="text-lg text-muted-foreground max-w-lg text-center md:text-left">
             Private rides with vetted drivers and instant WhatsApp confirmation.
             Airport pickups, intercity routes, and hourly bookings across
             Riyadh, Jeddah & Dammam.
           </p>
 
           {/* Features */}
-          <div className="flex flex-wrap gap-5 text-gray-700 justify-center md:justify-start">
+          <div className="flex flex-wrap gap-5 text-foreground justify-center md:justify-start">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-blue-600" /> Vetted drivers
+              <ShieldCheck className="w-5 h-5 text-blue-600 dark:text-blue-400" /> Vetted drivers
             </div>
             <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-blue-600" /> On-time pickup
+              <Clock className="w-5 h-5 text-blue-600 dark:text-blue-400" /> On-time pickup
             </div>
             <div className="flex items-center gap-2">
-              <MessageCircle className="w-5 h-5 text-blue-600" /> WhatsApp
+              <MessageCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" /> WhatsApp
               updates
             </div>
             <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-blue-600" /> Riyadh • Jeddah •
+              <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400" /> Riyadh • Jeddah •
               Dammam
             </div>
           </div>
@@ -517,7 +517,7 @@ function IntegrationsSectionContent({
             <Button
               asChild
               size="lg"
-              className="bg-blue-600 hover:bg-blue-700 px-6 py-3"
+              className="px-6 py-3"
             >
               <Link to="/book" className="inline-flex items-center gap-2">
                 Book a Ride
@@ -528,14 +528,14 @@ function IntegrationsSectionContent({
               asChild
               size="lg"
               variant="outline"
-              className="border-gray-300 hover:bg-gray-50 px-6 py-3"
+              className="px-6 py-3"
             >
               <Link to="#features">Learn More</Link>
             </Button>
           </div>
 
           {/* Trust Line */}
-          <p className="text-sm text-gray-500 pt-4 text-center md:text-left">
+          <p className="text-sm text-muted-foreground pt-4 text-center md:text-left">
             ⭐ Trusted by 10,000+ travelers across Saudi Arabia
           </p>
         </MotionDiv>

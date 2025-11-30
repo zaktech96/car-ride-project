@@ -286,13 +286,13 @@ export default function BookingsDashboard({
     switch (status) {
       case "confirmed":
         return (
-          <Badge variant="default" className="bg-blue-100 text-blue-800">
+          <Badge variant="default" className="bg-blue-500/10 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300">
             Confirmed
           </Badge>
         );
       case "completed":
         return (
-          <Badge variant="default" className="bg-green-100 text-green-800">
+          <Badge variant="default" className="bg-green-500/10 dark:bg-green-500/20 text-green-700 dark:text-green-300">
             Completed
           </Badge>
         );
@@ -309,7 +309,7 @@ export default function BookingsDashboard({
         return (
           <Badge
             variant="default"
-            className="bg-green-100 text-green-800 flex items-center gap-1"
+            className="bg-green-500/10 dark:bg-green-500/20 text-green-700 dark:text-green-300 flex items-center gap-1"
           >
             <CheckCircle className="w-3 h-3" />
             Paid
@@ -319,7 +319,7 @@ export default function BookingsDashboard({
         return (
           <Badge
             variant="default"
-            className="bg-yellow-100 text-yellow-800 flex items-center gap-1"
+            className="bg-yellow-500/10 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-300 flex items-center gap-1"
           >
             <ClockIcon className="w-3 h-3" />
             Pending
@@ -360,14 +360,14 @@ export default function BookingsDashboard({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">My Bookings</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-3xl font-bold text-foreground">My Bookings</h1>
+          <p className="text-muted-foreground mt-1">
             Manage your chauffeur service bookings
           </p>
           {isPolarEnabled && (
             <div className="flex items-center gap-2 mt-2">
-              <Crown className="w-4 h-4 text-blue-600" />
-              <span className="text-sm text-blue-600 font-medium">
+              <Crown className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
                 Polar payments enabled
               </span>
             </div>
@@ -383,14 +383,14 @@ export default function BookingsDashboard({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Car className="w-5 h-5 text-blue-600" />
+              <div className="w-10 h-10 bg-blue-500/10 dark:bg-blue-500/20 rounded-lg flex items-center justify-center">
+                <Car className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <div className="text-2xl font-bold">
+                <div className="text-2xl font-bold text-foreground">
                   {clientBookings.length}
                 </div>
-                <div className="text-sm text-gray-600">Total Bookings</div>
+                <div className="text-sm text-muted-foreground">Total Bookings</div>
               </div>
             </div>
           </CardContent>
@@ -399,17 +399,17 @@ export default function BookingsDashboard({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                <CheckCircle className="w-5 h-5 text-green-600" />
+              <div className="w-10 h-10 bg-green-500/10 dark:bg-green-500/20 rounded-lg flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <div className="text-2xl font-bold">
+                <div className="text-2xl font-bold text-foreground">
                   {
                     clientBookings.filter((b) => b.paymentStatus === "paid")
                       .length
                   }
                 </div>
-                <div className="text-sm text-gray-600">Paid</div>
+                <div className="text-sm text-muted-foreground">Paid</div>
               </div>
             </div>
           </CardContent>
@@ -418,17 +418,17 @@ export default function BookingsDashboard({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
-                <ClockIcon className="w-5 h-5 text-yellow-600" />
+              <div className="w-10 h-10 bg-yellow-500/10 dark:bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                <ClockIcon className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
               </div>
               <div>
-                <div className="text-2xl font-bold">
+                <div className="text-2xl font-bold text-foreground">
                   {
                     clientBookings.filter((b) => b.paymentStatus === "pending")
                       .length
                   }
                 </div>
-                <div className="text-sm text-gray-600">Pending Payment</div>
+                <div className="text-sm text-muted-foreground">Pending Payment</div>
               </div>
             </div>
           </CardContent>
@@ -437,12 +437,12 @@ export default function BookingsDashboard({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                <Star className="w-5 h-5 text-purple-600" />
+              <div className="w-10 h-10 bg-purple-500/10 dark:bg-purple-500/20 rounded-lg flex items-center justify-center">
+                <Star className="w-5 h-5 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
-                <div className="text-2xl font-bold">4.9</div>
-                <div className="text-sm text-gray-600">Avg Rating</div>
+                <div className="text-2xl font-bold text-foreground">4.9</div>
+                <div className="text-sm text-muted-foreground">Avg Rating</div>
               </div>
             </div>
           </CardContent>
@@ -458,8 +458,8 @@ export default function BookingsDashboard({
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <ServiceIcon className="w-5 h-5 text-blue-600" />
+                    <div className="w-10 h-10 bg-blue-500/10 dark:bg-blue-500/20 rounded-lg flex items-center justify-center">
+                      <ServiceIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
                       <CardTitle className="text-lg">{booking.id}</CardTitle>
@@ -479,31 +479,31 @@ export default function BookingsDashboard({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Trip Details */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-gray-900">
+                    <h4 className="font-semibold text-foreground">
                       Trip Details
                     </h4>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-blue-600" />
-                        <span className="text-sm">
+                        <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                        <span className="text-sm text-foreground">
                           <strong>From:</strong> {booking.pickupLocation}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-green-600" />
-                        <span className="text-sm">
+                        <MapPin className="w-4 h-4 text-green-600 dark:text-green-400" />
+                        <span className="text-sm text-foreground">
                           <strong>To:</strong> {booking.destination}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-purple-600" />
-                        <span className="text-sm">
+                        <Users className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                        <span className="text-sm text-foreground">
                           <strong>Passengers:</strong> {booking.passengers}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <CreditCard className="w-4 h-4 text-orange-600" />
-                        <span className="text-sm">
+                        <CreditCard className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                        <span className="text-sm text-foreground">
                           <strong>Price:</strong> {booking.estimatedPrice}
                         </span>
                       </div>
@@ -512,29 +512,29 @@ export default function BookingsDashboard({
 
                   {/* Driver Details */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-gray-900">
+                    <h4 className="font-semibold text-foreground">
                       Driver Details
                     </h4>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm">
+                        <span className="text-sm text-foreground">
                           <strong>Name:</strong> {booking.driver.name}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Car className="w-4 h-4 text-gray-600" />
-                        <span className="text-sm">
+                        <Car className="w-4 h-4 text-muted-foreground" />
+                        <span className="text-sm text-foreground">
                           <strong>Vehicle:</strong> {booking.driver.vehicle}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Star className="w-4 h-4 text-yellow-500" />
-                        <span className="text-sm">
+                        <Star className="w-4 h-4 text-yellow-500 dark:text-yellow-400" />
+                        <span className="text-sm text-foreground">
                           <strong>Rating:</strong> {booking.driver.rating}/5
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Phone className="w-4 h-4 text-green-600" />
+                        <Phone className="w-4 h-4 text-green-600 dark:text-green-400" />
                         <span className="text-sm">
                           <strong>Contact:</strong> {booking.driver.phone}
                         </span>
@@ -650,13 +650,13 @@ export default function BookingsDashboard({
       {clientBookings.length === 0 && (
         <Card>
           <CardContent className="p-12 text-center">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Car className="w-8 h-8 text-gray-400" />
+            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+              <Car className="w-8 h-8 text-muted-foreground" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-foreground mb-2">
               No bookings yet
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-muted-foreground mb-4">
               Start by booking your first chauffeur service
             </p>
             <Button asChild>

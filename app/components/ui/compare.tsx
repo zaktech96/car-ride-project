@@ -186,7 +186,7 @@ export const Compare = ({
             />
           </div>
           {showHandlebar && (
-            <div className="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-white z-30 -right-2.5 absolute   flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF40]">
+            <div className="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-background z-30 -right-2.5 absolute flex items-center justify-center shadow-[0px_-1px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[0px_-1px_0px_0px_rgba(255,255,255,0.1)]">
               <IconDotsVertical className="h-4 w-4 text-black" />
             </div>
           )}

@@ -558,15 +558,15 @@ export default function RideBookingForm({
 
             {/* Auto-calculated Route Information */}
             {selectedPickup && selectedDropoff && (
-              <div className="grid grid-cols-2 gap-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <div className="grid grid-cols-2 gap-4 p-4 bg-blue-500/10 dark:bg-blue-500/20 border border-blue-500/20 dark:border-blue-500/30 rounded-lg">
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-2 mb-1">
-                    <MapPin className="w-4 h-4 text-blue-600" />
-                    <span className="text-sm font-medium text-gray-700">
+                    <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    <span className="text-sm font-medium text-foreground">
                       Distance
                     </span>
                   </div>
-                  <div className="text-lg font-bold text-blue-600">
+                  <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
                     {isAutoCalculating ? (
                       <div className="flex items-center justify-center gap-1">
                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -579,12 +579,12 @@ export default function RideBookingForm({
                 </div>
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-2 mb-1">
-                    <Clock className="w-4 h-4 text-blue-600" />
-                    <span className="text-sm font-medium text-gray-700">
+                    <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    <span className="text-sm font-medium text-foreground">
                       Duration
                     </span>
                   </div>
-                  <div className="text-lg font-bold text-blue-600">
+                  <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
                     {isAutoCalculating ? (
                       <div className="flex items-center justify-center gap-1">
                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -846,8 +846,8 @@ export default function RideBookingForm({
                   whileHover={{ scale: 1.02 }}
                   className={`border rounded-lg p-6 space-y-3 ${
                     index === 0
-                      ? "border-blue-200 bg-blue-50"
-                      : "border-gray-200"
+                      ? "border-blue-500/20 dark:border-blue-500/30 bg-blue-500/10 dark:bg-blue-500/20"
+                      : "border-border"
                   }`}
                 >
                   {index === 0 && (
