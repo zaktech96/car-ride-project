@@ -14,7 +14,11 @@ import { cn } from "~/lib/utils";
 import { Navbar } from "./navbar";
 
 // Use shared safe framer-motion wrapper
-import { MotionDiv, MotionSpan, AnimatePresence } from "~/lib/safe-framer-motion";
+import {
+  MotionDiv,
+  MotionSpan,
+  AnimatePresence,
+} from "~/lib/safe-framer-motion";
 import {
   ArrowRight,
   Car,
@@ -90,10 +94,16 @@ function StatusTime() {
 
 // Error boundary wrapper for framer-motion
 class IntegrationsErrorBoundary extends React.Component<
-  { children: React.ReactNode; loaderData?: { isSignedIn: boolean; hasActiveSubscription: boolean } },
+  {
+    children: React.ReactNode;
+    loaderData?: { isSignedIn: boolean; hasActiveSubscription: boolean };
+  },
   { hasError: boolean }
 > {
-  constructor(props: { children: React.ReactNode; loaderData?: { isSignedIn: boolean; hasActiveSubscription: boolean } }) {
+  constructor(props: {
+    children: React.ReactNode;
+    loaderData?: { isSignedIn: boolean; hasActiveSubscription: boolean };
+  }) {
     super(props);
     this.state = { hasError: false };
   }
@@ -103,7 +113,11 @@ class IntegrationsErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error("IntegrationsSection error (likely framer-motion):", error, errorInfo);
+    console.error(
+      "IntegrationsSection error (likely framer-motion):",
+      error,
+      errorInfo
+    );
     // Force state update to show fallback
     this.setState({ hasError: true });
   }
@@ -111,7 +125,10 @@ class IntegrationsErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <section id="hero" className="relative overflow-hidden min-h-[600px] bg-background">
+        <section
+          id="hero"
+          className="relative overflow-hidden min-h-[600px] bg-background"
+        >
           <Navbar loaderData={this.props.loaderData} />
           <div className="container mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10 bg-background min-h-[400px]">
             <div className="flex flex-col space-y-6 text-foreground">
@@ -119,7 +136,8 @@ class IntegrationsErrorBoundary extends React.Component<
                 Premium Chauffeur Service in Saudi Arabia
               </h1>
               <p className="text-lg text-muted-foreground m-0">
-                Book your luxury ride with vetted drivers. Airport transfers, intercity travel, and hourly bookings.
+                Book your luxury ride with vetted drivers. Airport transfers,
+                intercity travel, and hourly bookings.
               </p>
               <Link to="/book" className="inline-block mt-4">
                 <Button size="lg" className="w-fit">
@@ -161,7 +179,10 @@ function IntegrationsSectionContent({
   }, []);
 
   return (
-    <section id="hero" className="relative bg-background overflow-hidden min-h-[600px]">
+    <section
+      id="hero"
+      className="relative bg-background overflow-hidden min-h-[600px]"
+    >
       <Navbar loaderData={loaderData} />
 
       <div className="container mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
@@ -406,15 +427,21 @@ function IntegrationsSectionContent({
                           <div className="text-xs text-muted-foreground mb-1">
                             Booking ID
                           </div>
-                          <div className="font-mono text-sm text-foreground">#RH-2024-001</div>
+                          <div className="font-mono text-sm text-foreground">
+                            #RH-2024-001
+                          </div>
                           <div className="text-xs text-muted-foreground mt-2 mb-1">
                             Driver
                           </div>
-                          <div className="text-sm text-foreground">Ahmed Al-Rashid</div>
+                          <div className="text-sm text-foreground">
+                            Ahmed Al-Rashid
+                          </div>
                           <div className="text-xs text-muted-foreground mt-2 mb-1">
                             Vehicle
                           </div>
-                          <div className="text-sm text-foreground">BMW 7 Series</div>
+                          <div className="text-sm text-foreground">
+                            BMW 7 Series
+                          </div>
                         </div>
                       </div>
                     </MotionDiv>
@@ -498,39 +525,32 @@ function IntegrationsSectionContent({
           {/* Features */}
           <div className="flex flex-wrap gap-5 text-foreground justify-center md:justify-start">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-blue-600 dark:text-blue-400" /> Vetted drivers
+              <ShieldCheck className="w-5 h-5 text-blue-600 dark:text-blue-400" />{" "}
+              Vetted drivers
             </div>
             <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-blue-600 dark:text-blue-400" /> On-time pickup
+              <Clock className="w-5 h-5 text-blue-600 dark:text-blue-400" />{" "}
+              On-time pickup
             </div>
             <div className="flex items-center gap-2">
-              <MessageCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" /> WhatsApp
-              updates
+              <MessageCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" />{" "}
+              WhatsApp updates
             </div>
             <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400" /> Riyadh • Jeddah •
-              Dammam
+              <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400" />{" "}
+              Riyadh • Jeddah • Dammam
             </div>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex gap-4 pt-4 justify-center md:justify-start">
-            <Button
-              asChild
-              size="lg"
-              className="px-6 py-3"
-            >
+            <Button asChild size="lg" className="px-6 py-3">
               <Link to="/book" className="inline-flex items-center gap-2">
                 Book a Ride
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="px-6 py-3"
-            >
+            <Button asChild size="lg" variant="outline" className="px-6 py-3">
               <Link to="#features">Learn More</Link>
             </Button>
           </div>
