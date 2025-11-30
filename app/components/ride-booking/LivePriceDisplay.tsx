@@ -191,7 +191,9 @@ export function LivePriceDisplay({
         {isCalculating && (
           <div className="flex items-center gap-2 py-4">
             <Loader2 className="w-4 h-4 animate-spin text-blue-500" />
-            <span className="text-muted-foreground">Calculating best price...</span>
+            <span className="text-muted-foreground">
+              Calculating best price...
+            </span>
           </div>
         )}
 
@@ -235,7 +237,9 @@ export function LivePriceDisplay({
                     <div className="text-sm font-medium text-foreground">
                       {routeInfo.distance}
                     </div>
-                    <div className="text-xs text-muted-foreground">Distance</div>
+                    <div className="text-xs text-muted-foreground">
+                      Distance
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -244,7 +248,9 @@ export function LivePriceDisplay({
                     <div className="text-sm font-medium text-foreground">
                       {routeInfo.duration}
                     </div>
-                    <div className="text-xs text-muted-foreground">Duration</div>
+                    <div className="text-xs text-muted-foreground">
+                      Duration
+                    </div>
                   </div>
                 </div>
               </div>

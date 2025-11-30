@@ -58,10 +58,16 @@ export function ThemeProvider({
         ? "dark"
         : "light";
       resolved = systemTheme;
-      root.classList.add(systemTheme);
+      // Only add "dark" class, light mode uses default :root styles
+      if (systemTheme === "dark") {
+        root.classList.add("dark");
+      }
     } else {
       resolved = theme;
-      root.classList.add(theme);
+      // Only add "dark" class, light mode uses default :root styles
+      if (theme === "dark") {
+        root.classList.add("dark");
+      }
     }
 
     setResolvedTheme(resolved);
@@ -75,7 +81,10 @@ export function ThemeProvider({
         const root = window.document.documentElement;
         root.classList.remove("light", "dark");
         const systemTheme = mediaQuery.matches ? "dark" : "light";
-        root.classList.add(systemTheme);
+        // Only add "dark" class, light mode uses default :root styles
+        if (systemTheme === "dark") {
+          root.classList.add("dark");
+        }
         setResolvedTheme(systemTheme);
       }
     };

@@ -180,7 +180,9 @@ export function LocationInput({
       <div className="relative">
         <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-colors">
           {/* Icon */}
-          {icon || <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />}
+          {icon || (
+            <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+          )}
 
           {/* Input */}
           <Input
